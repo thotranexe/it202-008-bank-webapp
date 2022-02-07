@@ -12,6 +12,7 @@ function getTotal($arr) {
     }
     //TODO do rounding stuff here
     $total=round($total,2);
+    $total=number_format((float)$total,2,'.','');
     echo "The total is " . var_export($total, true);
 }
 echo "Problem 2: Adding Floats<br>";

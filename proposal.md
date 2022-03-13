@@ -1,7 +1,7 @@
 # Project Name: Simple Bank
 ## Project Summary: This project will create a bank simulation for users. They’ll be able to have various accounts, do standard bank functions like deposit, withdraw, internal (user’s accounts)/external(other user’s accounts) transfers, and creating/closing 
-## Github Link: (Prod Branch of Project Folder)
-## Project Board Link: 
+## Github Link: https://github.com/thotranexe/it202-008/tree/prod
+## Project Board Link: https://github.com/thotranexe/it202-008/projects/1
 ## Website Link: (Heroku Prod of Project folder)
 ## Your Name: Tho Tran
 
@@ -17,7 +17,15 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-  - (duplicate template here for Milestone 1 features)  
+  - [ ] \(mm/dd/yyyy of completion) Register New Account
+  - [ ] \(mm/dd/yyyy of completion) Login to Account
+  - [ ] \(mm/dd/yyyy of completion) Log out of Account
+  - [ ] \(mm/dd/yyyy of completion) Basic security measures
+  - [ ] \(mm/dd/yyyy of completion) Basic Roles
+  - [ ] \(mm/dd/yyyy of completion) Basic Styles
+  - [ ] \(mm/dd/yyyy of completion) Output is user friendly
+  - [ ] \(mm/dd/yyyy of completion) See their profile
+  - [ ] \(mm/dd/yyyy of completion) Edit their profile
 - Milestone 2
   - (duplicate template here for Milestone 1 features)
 - Milestone 3

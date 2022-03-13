@@ -17,7 +17,15 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-  - (duplicate template here for Milestone 1 features)  
+  - [ ] \(mm/dd/yyyy of completion) Register New Account
+  - [ ] \(mm/dd/yyyy of completion) Login to Account
+  - [ ] \(mm/dd/yyyy of completion) Log out of Account
+  - [ ] \(mm/dd/yyyy of completion) Basic security measures
+  - [ ] \(mm/dd/yyyy of completion) Basic Roles
+  - [ ] \(mm/dd/yyyy of completion) Basic Styles
+  - [ ] \(mm/dd/yyyy of completion) Output is user friendly
+  - [ ] \(mm/dd/yyyy of completion) See their profile
+  - [ ] \(mm/dd/yyyy of completion) Edit their profile
 - Milestone 2
   - (duplicate template here for Milestone 1 features)
 - Milestone 3

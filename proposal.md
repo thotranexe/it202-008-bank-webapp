@@ -8,7 +8,7 @@
 <!-- Line item / Feature template (use this for each bullet point) -- DO NOT DELETE THIS SECTION
 
 
-- [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+- [ ] \(mm/dd/yyyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
   -  Link to related .md file: [Link Name](link url)
 
  End Line item / Feature Template -- DO NOT DELETE THIS SECTION --> 
@@ -17,15 +17,15 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-  - [ ] \(mm/dd/yyyy of completion) Register New Account
-  - [ ] \(mm/dd/yyyy of completion) Login to Account
-  - [ ] \(mm/dd/yyyy of completion) Log out of Account
-  - [ ] \(mm/dd/yyyy of completion) Basic security measures
-  - [ ] \(mm/dd/yyyy of completion) Basic Roles
-  - [ ] \(mm/dd/yyyy of completion) Basic Styles
-  - [ ] \(mm/dd/yyyy of completion) Output is user friendly
-  - [ ] \(mm/dd/yyyy of completion) See their profile
-  - [ ] \(mm/dd/yyyy of completion) Edit their profile
+  - [x] \(04/04/2022 of completion) Register New Account
+  - [x] \(04/04/2022 of completion) Login to Account
+  - [x] \(04/04/2022 of completion) Log out of Account
+  - [x] \(04/04/2022 of completion) Basic security measures
+  - [x] \(04/04/2022 of completion) Basic Roles
+  - [x] \(04/04/2022 of completion) Basic Styles
+  - [x] \(04/04/2022 of completion) Output is user friendly
+  - [x] \(04/04/2022 of completion) See their profile
+  - [x] \(04/04/2022 of completion) Edit their profile
 - Milestone 2
   - (duplicate template here for Milestone 1 features)
 - Milestone 3

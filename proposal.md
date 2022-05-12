@@ -1,7 +1,7 @@
 # Project Name: Simple Bank
 ## Project Summary: This project will create a bank simulation for users. They’ll be able to have various accounts, do standard bank functions like deposit, withdraw, internal (user’s accounts)/external(other user’s accounts) transfers, and creating/closing 
-## Github Link: (Prod Branch of Project Folder)
-## Project Board Link: 
+## Github Link: https://github.com/thotranexe/it202-008/tree/prod
+## Project Board Link: https://github.com/thotranexe/it202-008/projects/2
 ## Website Link: (Heroku Prod of Project folder)
 ## Your Name: Tho Tran
 
@@ -17,9 +17,24 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-  - (duplicate template here for Milestone 1 features)  
+  - [ ] \(04/03/2022 of completion) Register New Account
+  - [ ] \(04/03/2022 of completion) Login to Account
+  - [ ] \(04/03/2022 of completion) Log out of Account
+  - [ ] \(04/03/2022 of completion) Basic security measures
+  - [ ] \(04/03/2022 of completion) Basic Roles
+  - [ ] \(04/03/2022 of completion) Basic Styles
+  - [ ] \(04/03/2022 of completion) Output is user friendly
+  - [ ] \(04/03/2022 of completion) See their profile
+  - [ ] \(04/03/2022 of completion) Edit their profile
 - Milestone 2
-  - (duplicate template here for Milestone 1 features)
+  - [ ] \(mm/dd/yyyy of completion) Accounts table
+  - [ ] \(mm/dd/yyyy of completion) Transaction table
+  - [ ] \(mm/dd/yyyy of completion) Dashboard Page
+  - [ ] \(mm/dd/yyyy of completion) Create Checkings Account
+  - [ ] \(mm/dd/yyyy of completion) Users can list their accounts
+  - [ ] \(mm/dd/yyyy of completion) Be able to withdraw/deposit
+  - [ ] \(mm/dd/yyyy of completion) Create a User if doesnt exist/ World Account(initial scripts)
+  - [ ] \(mm/dd/yyyy of completion) Users can click for more information(transactions)
 - Milestone 3
   - (duplicate template here for Milestone 1 features)
 - Milestone 4

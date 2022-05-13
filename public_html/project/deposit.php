@@ -2,6 +2,7 @@
 require(__DIR__ . "/../../partials/nav.php");
 require(__DIR__ . "/../../partials/dashboard_nav.php");
 is_logged_in(true);
+get_or_create_account();
 $db = getDB();
 $accNum = get_user_id();
 $query = "SELECT account From BankAccounts WHERE user_id='".$accNum."'";
@@ -33,12 +34,10 @@ try {
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label>Select Account</label>
-        <?
-        echo "<select name='select'>";
-                foreach($accounts as $account):
-                     echo "<option value='$account'>".$acount['account']."</option>";
-        echo "</select";
-        ?>
+            <select name="accountno">
+                <option value=$accountno[0]>Checking</option>
+                <option value=$accountno[1]>Savings</option>
+            </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />
         <input type="submit" class="btn btn-info" value="CONFIRM" />
@@ -97,7 +96,8 @@ if(isset($_POST["amount"])){
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
     $stmt->execute([":nb" => $wnb,":account_recieving" => $wcc])*/
 }
-?>
 
+?>
 <?php
-require(__DIR__ . "/../../partials/footer.php");?>
+require(__DIR__ . "/../../partials/footer.php");
+?>

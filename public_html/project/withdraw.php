@@ -26,25 +26,29 @@ if(isset($_POST["amount"])){
     $userAccount = $stmt->fetch(PDO::FETCH_ASSOC);
     $userAccount = implode("",$userAccount);
 
-    $account_recieving= $userAccount;
+    $account_withdrawing= $userAccount;
     $withdraw=-1*(int)se($_POST,"amount","",false);
     $wdraw=-1*$withdraw;
     $world='000000000000';
     $tran_type='Withdraw';
     //transaction
     $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
-    VALUES(:account_recieving,:world,:withdraw,:tran_type,:withdraw),(:world,:account_recieving,:wdraw,:tran_type,:wdraw)");
+    VALUES(:account_withdrawing,:world,:withdraw,:tran_type,:withdraw),(:world,:account_withdrawing,:wdraw,:tran_type,:wdraw)");
     $stmt->bindValue(":world",$world);
-    $stmt->bindValue(":account_recieving",$account_recieving);
+    $stmt->bindValue(":account_withdrawing",$account_withdrawing);
     $stmt->bindValue(":withdraw",$withdraw);
     $stmt->bindValue(":tran_type",$tran_type);
     $stmt->bindValue(":withdraw",$withdraw);
     $stmt->bindValue(":wdraw",$wdraw);
     $stmt->execute();
     //uodating balances
-    $nb=get_account_balance()+$withdraw;
-    $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
-    $stmt->execute([":nb" => $nb,":account_recieving" => $account_recieving]);
+    $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:account_withdrawing");
+    $stmt->execute([":account_withdrawing"=>$account_withdrawing]);
+    $cbal=$stmt->fetch(PDO::FETCH_ASSOC);
+    $cbal=implode("",$cbal);
+    $nb=$cbal+$withdraw;
+    $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
+    $stmt->execute([":nb" => $nb,":account_withdrawing" => $account_withdrawing]);
 
     /*$stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account='000000000000'");
     $stmt->execute();
@@ -55,8 +59,8 @@ if(isset($_POST["amount"])){
     $stmt->execute();
     $wcc=$stmt->fetch(PDO::FETCH_ASSOC);
     $wcc=implode("",$wcc);
-    $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
-    $stmt->execute([":nb" => $wnb,":account_recieving" => $wcc])*/
+    $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
+    $stmt->execute([":nb" => $wnb,":account_withdrawing" => $wcc])*/
 }
 
 ?>

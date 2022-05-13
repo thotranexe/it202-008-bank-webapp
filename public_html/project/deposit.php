@@ -34,12 +34,13 @@ try {
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <?php
-            print_r($accounts);
+            //print_r($accounts);
+            $submittedValue='';
         ?>
         <label>Select Account</label>
-            <select name="accountno">
-                <option value='.$accounts[0]'>Checking</option>
-                <option value='$accounts[1]'>Savings</option>
+            <select name="accountno" size=5>
+                <option value = "<?php echo $accounts[0]; ?>"<?php echo ($accounts[0] == $submittedValue)?" SELECTED":""?>><?php echo $accounts[0]; ?></option>
+                <option value = "<?php echo $accounts[1]; ?>"<?php echo ($accounts[1] == $submittedValue)?" SELECTED":""?>><?php echo $accounts[1]; ?></option>
             </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />

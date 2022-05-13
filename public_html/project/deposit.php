@@ -35,6 +35,7 @@ try {
     <div>
         <?php
             //print_r($accounts);
+            echo implode(" ",$accounts);
             $submittedValue='';
         ?>
         <label>Select Account</label>

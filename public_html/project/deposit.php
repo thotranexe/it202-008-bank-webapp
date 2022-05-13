@@ -29,15 +29,17 @@ if(isset($_POST["amount"])){
 
     $account_recieving= $userAccount;
     $deposit=(int)se($_POST,"amount","",false);
+    $wdepo=-1*$deposit;
     $world='000000000000';
     $tran_type='Deposit';
     $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
-    VALUES(:world,:account_recieving,:deposit,:tran_type,:deposit)");
+    VALUES(:world,:account_recieving,:deposit,:tran_type,:deposit),(:account_recieving,:world,:wdepo,:tran_type,:wdepo)");
     $stmt->bindValue(":world",$world);
     $stmt->bindValue(":account_recieving",$account_recieving);
     $stmt->bindValue(":deposit",$deposit);
     $stmt->bindValue(":tran_type",$tran_type);
     $stmt->bindValue(":deposit",$deposit);
+    $stmt->bindValue(":wdepo,$wdepo");
     $stmt->execute();
 
     $nb=get_account_balance()+$deposit;

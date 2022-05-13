@@ -55,7 +55,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $nb=$cbal+$withdraw;
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
     $stmt->execute([":nb" => $nb,":account_withdrawing" => $account_withdrawing]);
-
+    get_or_create_account();
     /*$stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account='000000000000'");
     $stmt->execute();
     $wcbal=$stmt->fetch(PDO::FETCH_ASSOC);

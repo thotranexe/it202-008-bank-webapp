@@ -25,6 +25,11 @@ if(isset($_POST["amount"])){
     $tran_type='Deposit';
     $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
     VALUES(:world,:account_recieving,:deposit,:tran_type,:deposit)");
+    $stmt->bindValue(":world",$world);
+    $stmt->bindValue(":account_recieving",$account_recieving);
+    $stmt->bindValue(":deposit",$deposit);
+    $stmt->bindValue(":tran_type",$tran_type);
+    $stmt->bindValue(":deposit",$deposit);
     $stmt->execute();
     $rec_nb=$_SESSION['balance']+$deposit;
 }

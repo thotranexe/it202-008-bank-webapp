@@ -1,77 +1,56 @@
+<?php require_once(__DIR__ . "/partials/nav.php"); ?>
 <?php
 
-?><?php
-require(__DIR__ . "/../../partials/nav.php");
-require(__DIR__ . "/../../partials/dashboard_nav.php");
+if (!is_logged_in()) {
+    flash("You must be logged in to access this page");
+    die(header("Location: login.php"));
+}
+
+if(isset($_GET["id"])){
+    $account_id = $_GET["id"];
+}
 
 $db = getDB();
-$accNum = get_user_id();
-$query = "SELECT id, account, balance, accType, created, modified from BankAccounts WHERE user_id='".$accNum."'";
 
-//$stmt = $db->prepare($query); 
-//$stmt->bind_param("i", $accNum);
-//$stmt->execute();
-//$result = $stmt->get_result(); // get the mysqli result
-//$user = $result->fetch_assoc(); // fetch the data   
+if(isset($account_id)) {
 
-$params = null;
-$query .= " ORDER BY modified desc LIMIT 5";
-
-$stmt = $db->prepare($query);
-$accounts = [];
-try {
-    $stmt->execute($params);
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($results) {
-        $accounts = $results;
+    $stmt = $db->prepare("SELECT amount, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
+    $r = $stmt->execute(["account_id" => $account_id]);
+    if ($r) {
+        $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {
-        flash("No matches found", "warning");
+        $e = $stmt->errorInfo();
+        flash("There was an error fetching transaction info " . var_export($e, true));
     }
-} catch (PDOException $e) {
-    flash(var_export($e->errorInfo, true), "danger");
-}
-$query="SELECT * FROM Transactions WHERE acc_source=:accountnum OR acc_destination=:accountnum";
-
-foreach($accounts as $accountno){
-    $number=se($accountno, "account");
-    $stmt=$db->prepare($query);
-    $stmt->bindValue(":acc_source",$number);
-    $stmt->bindValue(":acc_destination",$number);
-    $stmt->execute();
-    $tran_hist=$stmt->fetchALL(PDO::FETCH_ASSOC);
-    print_r($trans_hist);
 }
 ?>
-
-<h1>List Accounts</h1>
-<h3>Account Types:</h3>
-<h5>2 = Checking, 3 = Savings</h5>
-<table>
-    <thead>
-        <th>Account Number</th>
-        <th>Account Type</th>
-        <th>Balance</th>
-        <th>Date Created</th>
-        <th>Recent Transaction Date</th>
-    </thead>
-    <tbody>
-        <?php if (empty($accounts)) : ?>
-            <tr>
-                <td colspan="100%">No roles</td>
-            </tr>
-        <?php else : ?>
-            <?php foreach ($accounts as $account) : ?>
-                <tr>
-                    <td style="padding-right: 15px;"><?php se($account, "account"); ?></td>
-                    <td style="padding-right: 15px;"><?php se($account, "accType"); ?></td>
-                    <td style="padding-right: 15px;"><?php se($account, "balance"); ?></td>
-                    <td style="padding-right: 15px;"><?php se($account, "created"); ?></td>  
-                    <td style="padding-right: 15px;"><?php se($account, "modified"); ?></td>  
-                </tr>
-            <?php endforeach; ?>
+    <h3>Transaction History</h3>
+    <div class="results">
+        <?php if (count($transactions) > 0): ?>
+            <div class="list-group">
+                <?php foreach ($transactions as $t): ?>
+                    <div class="list-group-item">
+                        <div>
+                            <div>Amount:</div>
+                            <div><?php safer_echo($t["amount"]); ?></div>
+                        </div>
+                        <div>
+                            <div>Action Type:</div>
+                            <div><?php safer_echo($t["action_type"]); ?></div>
+                        </div>
+                        <div>
+                            <div>Memo:</div>
+                            <div><?php safer_echo($t["memo"]); ?></div>
+                        </div>
+                        <div>
+                            <div>Created:</div>
+                            <div><?php safer_echo($t["created"]); ?></div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p>No results</p>
         <?php endif; ?>
-    </tbody>
-</table>
-<?php
-require(__DIR__ . "/../../partials/footer.php");
-?>
+    </div>
+<?php require(__DIR__ . "/partials/flash.php");

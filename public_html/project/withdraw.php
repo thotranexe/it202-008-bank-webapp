@@ -91,17 +91,6 @@ if(isset($_POST["amount"])&&!$haserror){
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
     $stmt->execute([":nb" => $nb,":account_withdrawing" => $account_withdrawing]);
     get_or_create_account();
-    /*$stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account='000000000000'");
-    $stmt->execute();
-    $wcbal=$stmt->fetch(PDO::FETCH_ASSOC);
-    $wcbal=implode("",$wcbal);
-    $wnb=$wcbal-$deposit;
-    $stmt=$db->prepare("SELECT account FROM BankAccounts WHERE account='000000000000'");
-    $stmt->execute();
-    $wcc=$stmt->fetch(PDO::FETCH_ASSOC);
-    $wcc=implode("",$wcc);
-    $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
-    $stmt->execute([":nb" => $wnb,":account_withdrawing" => $wcc])*/
 }
 
 ?>

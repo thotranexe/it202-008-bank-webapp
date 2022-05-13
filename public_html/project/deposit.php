@@ -39,7 +39,7 @@ if(isset($_POST["amount"])){
     $stmt->bindValue(":deposit",$deposit);
     $stmt->bindValue(":tran_type",$tran_type);
     $stmt->bindValue(":deposit",$deposit);
-    $stmt->bindValue(":wdepo,$wdepo");
+    $stmt->bindValue(":wdepo",$wdepo);
     $stmt->execute();
 
     $nb=get_account_balance()+$deposit;

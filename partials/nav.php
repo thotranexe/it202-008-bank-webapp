@@ -65,9 +65,9 @@ session_start();
             </ul>
             <!-- this is what changed for this gist -->
             <?php if (is_logged_in()) : ?>
-                <span class="navbar-text show-balance">
+                <a class="navbar-text show-balance">
                     Test Placeholder, should get replaced if balance.php loads and works
-                </span>
+                </a>
             <?php endif; ?>
         </div>
     </div>

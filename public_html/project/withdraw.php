@@ -18,6 +18,7 @@ is_logged_in(true);
 </script>
 <?php
 $haserror=false;
+get_or_create_account();
 if(((int)se($_POST,"amount","",false))>get_account_balance()){
     $haserror=true;
     flash("You dont have enough money to withdraw that amount","danger");
@@ -66,9 +67,6 @@ if(isset($_POST["amount"])&&!$haserror){
     $wcc=implode("",$wcc);
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
     $stmt->execute([":nb" => $wnb,":account_withdrawing" => $wcc])*/
-}else{
-    flash("Dude you didnt put an amount?");
-    
 }
 
 ?>

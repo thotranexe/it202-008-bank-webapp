@@ -91,12 +91,12 @@ if(isset($_POST["amount"])&&!$haserror){
     if((int)$test>=0){
         //first update from account
         $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, memo, expected_total) 
-        VALUES(:s_acc, :d_account,:amount,:ttype,:memo,:expected_total),(:d_account,:s_acc,:invers,:ttype,:memo,:expected_nb)");
+        VALUES(:s_acc,:d_account,:amount,:ttype,:memo,:expected_total),(:d_account,:s_acc,:invers,:ttype,:memo,:expected_nb)");
         $stmt->bindValue(":s_acc",$from);
         $stmt->bindValue(":d_account",$to);
         $stmt->bindValue(":amount",$inverse);
         $stmt->bindValue(":ttype",$mem);
-        $stmt->bindValue("invers",$transfer);
+        $stmt->bindValue(":invers",$transfer);
         $stmt->bindValue(":expected_total",$s_nb);
         $stmt->bindValue(":excpected_nd",$d_nb);
         $stmt->execute();

@@ -13,21 +13,12 @@ function get_or_create_account($accountnumb=NULL)
         //id is for internal references, account_number is user facing info, and balance will be a cached value of activity
         $account = ["id" => -1, "account_number" => false, "balance" => 0];
         //this should always be 0 or 1, but being safe
-        $query = "SELECT id, account, balance from BankAccounts where user_id = :uid LIMIT 5";
+        $query = "SELECT id, account, balance from BankAccounts where user_id = :uid LIMIT 1";
         $db = getDB();
         $stmt = $db->prepare($query);
         try {
             $stmt->execute([":uid" => get_user_id()]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            if($accountnumb!=NULL){
-                $query="SELECT id ,account, balance from BankAccounts WHERE account=:accountnumb";
-                $stmt=$db->prepare($query);
-                $stmt->execute([":accountnum"=>$accountnumb]);
-                $passnum=$stmt->fetch(PDO::FETCH_ASSOC);
-                $account["id"] = $passnum["id"];
-                $account["account_number"] = $passnum["account"];
-                $account["balance"] = $passnum["balance"];
-            }
             if (!$result) {
                 //account doesn't exist, create it
                 try {

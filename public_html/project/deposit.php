@@ -22,7 +22,7 @@ try {
     $stmt->execute($params);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($results) {
-        $accounts = $results;
+        $accounts = $results['account'];
     } else {
         flash("No matches found", "warning");
     }
@@ -43,7 +43,7 @@ try {
             <?php
         
         // Iterating through the product array
-        foreach($accounts as $account['account']){
+        foreach($accounts as $account){
             echo "<option value='strtolower($account)'>$account</option>";
         }
         ?>

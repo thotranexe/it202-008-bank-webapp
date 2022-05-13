@@ -7,14 +7,19 @@ if (!is_logged_in()) {
     die(header("Location: login.php"));
 }
 
-$account_id = (string)get_account_number();
+$account_id = get_user_id();
 print($account_id);
+
 $db = getDB();
+$stmt = $db->prepare("SELECT account FROM BankAccounts WHERE user_ID=:userID ORDER BY created DESC LIMIT 1");
+$stmt->execute([":userID" => $idNum]);
+$userAccount = $stmt->fetch(PDO::FETCH_ASSOC);
+$userAccount = implode("",$userAccount);
 
 if(isset($account_id)) {
 
     $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
-    $r = $stmt->execute(["account_id" => $account_id]);
+    $r = $stmt->execute(["account_id" => $userAccount]);
     if ($r) {
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         print_r($transactions);

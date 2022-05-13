@@ -39,9 +39,14 @@ try {
             $submittedValue='';
         ?>
         <label>Select Account</label>
-            <select name="accountno" size=5>
-                <option value = "<?php echo $accounts[0]; ?>"<?php echo ($accounts[0] == $submittedValue)?" SELECTED":""?>><?php echo $accounts[0]; ?></option>
-                <option value = "<?php echo $accounts[1]; ?>"<?php echo ($accounts[1] == $submittedValue)?" SELECTED":""?>><?php echo $accounts[1]; ?></option>
+            <select name="accountno">
+            <?php
+        
+        // Iterating through the product array
+        foreach($accounts as $account){
+            echo "<option value='strtolower($account)'>$account</option>";
+        }
+        ?>
             </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />

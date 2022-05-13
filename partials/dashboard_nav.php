@@ -21,6 +21,11 @@
   <?php endif; ?>
   <?php if (is_logged_in()) : ?>
   <li class="nav-item">
+    <a class="nav-link" href="<?php echo get_url('transaction_history.php'); ?>">Hisorty</a>
+  </li>
+  <?php endif; ?>
+  <?php if (is_logged_in()) : ?>
+  <li class="nav-item">
     <a class="nav-link" href="#">Transfer</a>
   </li>
   <?php endif; ?>

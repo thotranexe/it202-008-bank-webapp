@@ -34,7 +34,7 @@ try {
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <?php
-            print($accounts)
+            print($accounts['accounts']);
         ?>
         <label>Select Account</label>
             <select name="accountno">

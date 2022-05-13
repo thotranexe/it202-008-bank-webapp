@@ -39,7 +39,8 @@ if(isset($_POST["amount"])){
     $stmt->bindValue(":tran_type",$tran_type);
     $stmt->bindValue(":deposit",$deposit);
     $stmt->execute();
-    $rec_nb=$_SESSION['balance']+$deposit;
+    $stmt=$db->prepare("UPDATE BankAccounts SET balance=:deposit WHERE account=:account_recieving");
+    $stmt->execute([":deposit" => $deposit,":account_recieving" => $account_recieving]);
 }
 
 ?>

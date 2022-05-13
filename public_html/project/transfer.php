@@ -95,8 +95,9 @@ if(isset($_POST["amount"])&&!$haserror){
         $stmt->bindValue(":s_acc",$from);
         $stmt->bindValue(":d_account",$to);
         $stmt->bindValue(":amount",$inverse);
-        $stmt->bindValue(":ttype",$mem);
-        $stmt->bindValue(":invers",$transfer);
+        $stmt->bindValue(":ttype",$tran_type);
+        $stmt->bindValue(":memo",$mem);
+        $stmt->bindValue(":inverse",$transfer);
         $stmt->bindValue(":expected_total",$s_nb);
         $stmt->bindValue(":excpected_nb",$d_nb);
         $stmt->execute();

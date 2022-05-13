@@ -8,7 +8,7 @@ if (!is_logged_in()) {
 }
 
 $account_id = get_user_id();
-print($account_id);
+//print($account_id);
 
 $db=getDB();
 $idNum = get_user_id();

@@ -34,11 +34,7 @@ try {
 <h1> Deposit </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
-        <?php
-
-            $submittedValue='';
-        ?>
-            <select name="user_account">
+    <select name="user_account">
         <?php foreach ($accounts as $account) : ?>
             <option value="<?php se($account, 'account'); ?>"><?php se($account, "account"); ?></option>
         <?php endforeach; ?>
@@ -58,11 +54,11 @@ if(isset($_POST["amount"])){
     $db=getDB();
     $idNum = get_user_id();
     //get account
-    $stmt = $db->prepare("SELECT account FROM BankAccounts WHERE user_ID=:userID ORDER BY created DESC LIMIT 1");
+    /*$stmt = $db->prepare("SELECT account FROM BankAccounts WHERE user_ID=:userID ORDER BY created DESC LIMIT 1");
     $stmt->execute([":userID" => $idNum]);
     $userAccount = $stmt->fetch(PDO::FETCH_ASSOC);
-    $userAccount = implode("",$userAccount);
-
+    $userAccount = implode("",$userAccount);*/
+    $userAccount = se($_POST, "user_account", "", false);
     $account_recieving= $userAccount;
     $deposit=(int)se($_POST,"amount","",false);
     $wdepo=-1*$deposit;

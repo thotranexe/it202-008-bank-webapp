@@ -24,7 +24,7 @@ if(isset($account_id)) {
     $r = $stmt->execute(["account_id" => $userAccount]);
     if ($r) {
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        print_r($transactions);
+        //print_r($transactions);
     } else {
         $e = $stmt->errorInfo();
         flash("There was an error fetching transaction info " . var_export($e, true));

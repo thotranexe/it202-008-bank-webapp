@@ -34,7 +34,7 @@ try {
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <?php
-            print_r($accounts);
+            //print_r($accounts);
             //echo implode(" ",$accounts);
             $submittedValue='';
         ?>
@@ -43,7 +43,7 @@ try {
             <?php
         
         // Iterating through the product array
-        foreach($accounts as $account){
+        foreach($accounts as $account['account']){
             echo "<option value='strtolower($account)'>$account</option>";
         }
         ?>

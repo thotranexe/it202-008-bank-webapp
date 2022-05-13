@@ -6,7 +6,7 @@
  * Will populate/refresh $_SESSION["user"]["account"] regardless.
  * Make sure this is called after the session has been set
  */
-function get_or_create_account()
+function get_or_create_account($accountnumb=NULL)
 {
     if (is_logged_in()) {
         //let's define our data structure first

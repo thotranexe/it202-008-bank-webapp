@@ -44,8 +44,10 @@ try {
             </select>
         <label>Amount transfering</label>
         <input type="number" name="amount" min="1"  required />
-        <label>Memo</label>
-        <input type="text" name="username" required maxlength="150" />
+        <div>
+            <label>Memo</label>
+            <input type="text" name="message" required maxlength="150" />
+        </div>
         <input type="submit" class="btn btn-info" value="CONFIRM" />
     </div>
 </form>

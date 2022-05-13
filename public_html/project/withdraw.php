@@ -17,7 +17,16 @@ is_logged_in(true);
     }
 </script>
 <?php
-if(isset($_POST["amount"])){
+$haserror=false;
+if(!isset($_POST,"ammount","",false)){
+    $haserror=true;
+    flash("dude put in an amount");
+}
+elseif(((int)se($_POST,"amount","",false))>get_account_balance()){
+    $haserror=true;
+    flash("You dont have enough money to withdraw that amount","danger");
+}
+if(isset($_POST["amount"])&&!$haserror){
     $db=getDB();
     $idNum = get_user_id();
     //get account

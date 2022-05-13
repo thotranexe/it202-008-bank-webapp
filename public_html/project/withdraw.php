@@ -42,7 +42,7 @@ if(isset($_POST["amount"])){
     $stmt->bindValue(":wdraw",$wdraw);
     $stmt->execute();
     //uodating balances
-    $nb=get_account_balance()-$wdraw;
+    $nb=get_account_balance()+$withdraw;
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
     $stmt->execute([":nb" => $nb,":account_recieving" => $account_recieving]);
 

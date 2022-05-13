@@ -15,7 +15,7 @@ require(__DIR__ . "/../../partials/nav.php");
   <?php endif; ?>
   <?php if (is_logged_in()) : ?>
   <li class="nav-item">
-    <a class="nav-link" href="#">Deposit</a>
+    <a class="nav-link" href="<?php echo get_url('deposit.php'); ?>">Deposit</a>
   </li>
   <?php endif; ?>
   <?php if (is_logged_in()) : ?>

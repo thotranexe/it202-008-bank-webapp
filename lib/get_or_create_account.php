@@ -13,7 +13,7 @@ function get_or_create_account()
         //id is for internal references, account_number is user facing info, and balance will be a cached value of activity
         $account = ["id" => -1, "account_number" => false, "balance" => 0];
         //this should always be 0 or 1, but being safe
-        $query = "SELECT id, account, balance from RM_Accounts where user_id = :uid LIMIT 1";
+        $query = "SELECT id, account, balance from BankAccounts where user_id = :uid LIMIT 1";
         $db = getDB();
         $stmt = $db->prepare($query);
         try {

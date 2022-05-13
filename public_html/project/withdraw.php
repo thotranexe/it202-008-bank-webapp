@@ -27,8 +27,8 @@ if(isset($_POST["amount"])){
     $userAccount = implode("",$userAccount);
 
     $account_recieving= $userAccount;
-    $withraw=-1*(int)se($_POST,"amount","",false);
-    $wdraw=$wdraw;
+    $withdraw=-1*(int)se($_POST,"amount","",false);
+    $wdraw=-1*$withdraw;
     $world='000000000000';
     $tran_type='Withdraw';
     //transaction

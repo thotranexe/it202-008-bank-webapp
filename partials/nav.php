@@ -64,9 +64,11 @@ session_start();
                 <?php endif; ?>
             </ul>
             <!-- this is what changed for this gist -->
-            <span class="navbar-text show-balance">
+            <?php if (is_logged_in()) : ?>
+                <span class="navbar-text show-balance">
                     bal no workie :(
-            </span>
+                </span>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

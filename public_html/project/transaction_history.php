@@ -13,7 +13,7 @@ $db = getDB();
 
 if(isset($account_id)) {
 
-    $stmt = $db->prepare("SELECT amount, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
+    $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
     $r = $stmt->execute(["account_id" => $account_id]);
     if ($r) {
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);

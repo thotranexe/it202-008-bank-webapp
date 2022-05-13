@@ -66,6 +66,9 @@ if(isset($_POST["amount"])&&!$haserror){
     $wcc=implode("",$wcc);
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
     $stmt->execute([":nb" => $wnb,":account_withdrawing" => $wcc])*/
+}else{
+    flash("Dude you didnt put an amount?");
+    
 }
 
 ?>

@@ -90,14 +90,13 @@ if (isset($_POST["bal"]) && isset($_POST["account_type"])) {
 	    $result = $stmt->execute();
     	echo var_export($result, true);
     	echo var_export($stmt->errorInfo(), true);
+        flash("Account created!", "success");
 	    return $result;
         //$stmt = $db->prepare("UPDATE BankAccounts SET balance = :world WHERE user_id=-1");
         //$stmt->execute([":world" => $world]);
 
         //$stmt = $db->prepare("UPDATE BankAccounts SET balance = :bal WHERE user_id=:userID");
         //$stmt->execute([":bal" => $cash, ":userID" => $idNum]);
-        
-        flash("Account created!", "success");
         
     }
 

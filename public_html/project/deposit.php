@@ -84,7 +84,6 @@ if(isset($_POST["amount"])){
     $nb=$cbal+$deposit;
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
     $stmt->execute([":nb" => $nb,":account_recieving" => $account_recieving]);
-    echo "<meta http-equiv='refresh' content='0'>";
     flash("BIG $$$","sucess");
     get_or_create_account();
 }

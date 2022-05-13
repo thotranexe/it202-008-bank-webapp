@@ -16,7 +16,7 @@
   <?php endif; ?>
   <?php if (is_logged_in()) : ?>
   <li class="nav-item">
-    <a class="nav-link" href="#">Withdraw</a>
+    <a class="nav-link" href="<?php echo get_url('withdraw.php'); ?>">Withdraw</a>
   </li>
   <?php endif; ?>
   <?php if (is_logged_in()) : ?>

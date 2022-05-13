@@ -42,10 +42,12 @@ if(isset($_POST["amount"])){
     $stmt->bindValue(":wdepo",$wdepo);
     $stmt->execute();
     //uodating balances
+    //get current bal
     $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:account_recieving");
     $stmt->execute([":account_recieving"=>$account_recieving]);
     $cbal=$stmt->fetch(PDO::FETCH_ASSOC);
     $cbal=implode("",$cbal);
+    //set newbal
     $nb=$cbal+$deposit;
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
     $stmt->execute([":nb" => $nb,":account_recieving" => $account_recieving]);

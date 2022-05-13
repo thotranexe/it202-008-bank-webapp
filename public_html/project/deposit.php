@@ -29,7 +29,7 @@ try {
 } catch (PDOException $e) {
     flash(var_export($e->errorInfo, true), "danger");
 }
-$accountno=[];
+$accountno=array();
 foreach($accounts as $accounts){
     array_push($accountno,$accounts["account"]);
 }
@@ -39,8 +39,8 @@ foreach($accounts as $accounts){
     <div>
         <label>Select Account</label>
             <select name="accountno">
-                <option value=$accountno[0]>Checking</option>
-                <option value=$accountno[1]>Savings</option>
+                <option value="2"></option>
+                <option value="3"></option>
             </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />

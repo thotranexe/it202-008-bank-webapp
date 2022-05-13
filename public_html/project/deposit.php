@@ -2,10 +2,46 @@
 require(__DIR__ . "/../../partials/nav.php");
 require(__DIR__ . "/../../partials/dashboard_nav.php");
 is_logged_in(true);
+get_or_create_account();
+$db = getDB();
+$accNum = get_user_id();
+$query = "SELECT account From BankAccounts WHERE user_id='".$accNum."'";
+
+//$stmt = $db->prepare($query); 
+//$stmt->bind_param("i", $accNum);
+//$stmt->execute();
+//$result = $stmt->get_result(); // get the mysqli result
+//$user = $result->fetch_assoc(); // fetch the data   
+
+$params = null;
+$query .= " ORDER BY modified desc LIMIT 5";
+
+$stmt = $db->prepare($query);
+$accounts = [];
+try {
+    $stmt->execute($params);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($results) {
+        $accounts = $results;
+    } else {
+        flash("No matches found", "warning");
+    }
+} catch (PDOException $e) {
+    flash(var_export($e->errorInfo, true), "danger");
+}
+$accountno=array();
+foreach($accounts as $accounts){
+    array_push($account_no,$accounts["account"]);
+}
 ?>
 <h1> Deposit </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
+        <label>Select Account</label>
+            <select name="accountno">
+                <option value=$accountno[0]>Checking</option>
+                <option value=$accountno[1]>Savings</option>
+            </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />
         <input type="submit" class="btn btn-info" value="CONFIRM" />

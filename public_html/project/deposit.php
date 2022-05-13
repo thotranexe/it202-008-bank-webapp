@@ -22,7 +22,8 @@ try {
     $stmt->execute($params);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($results) {
-        $accounts = $results['account'];
+        print_r($results);
+        $accounts = $results;
     } else {
         flash("No matches found", "warning");
     }

@@ -6,9 +6,9 @@ is_logged_in(true);
 <h1> Deposit </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
-        <label>Starting Deposit</label>
-        <input type="number" name="$" min="1"  required />
-        <input type="submit" class="btn btn-info" value="deposit" />
+        <label>Amount Depositing</label>
+        <input type="number" name="amount" min="1"  required />
+        <input type="submit" class="btn btn-info" value="CONFIRM" />
     </div>
 </form>
 <script>
@@ -16,6 +16,20 @@ is_logged_in(true);
         return true;
     }
 </script>
+<?php
+if(isset($_POST["amount"])){
+    $db=getDB();
+    $account_recieving= $_SESSION['account'];
+    $deposit=(int)se($_POST,"amount","",false);
+    $world='000000000000';
+    $tran_type='Deposit';
+    $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
+    VALUES($world,$account_recieving,$deposit,$tran_type,$deposit)");
+    $stmt->execute();
+    $rec_nb=$_SESSION['balance']+$deposit;
+}
+
+?>
 <?php
 require(__DIR__ . "/../../partials/footer.php");
 ?>

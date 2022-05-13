@@ -38,7 +38,7 @@ function get_or_create_account()
             } else {
                 //$account = $result; //just copy it over
                 $account["id"] = $result["id"];
-                $account["account_number"] = $result["account"];
+                $account["account"] = $result["account"];
                 $account["balance"] = $result["balance"];
             }
         } catch (PDOException $e) {

@@ -1,7 +1,6 @@
 IF NOT EXISTS(
-    SELECT account
-    FROM BankAccounts 
-    WHERE account = "000000000000"
+    SELECT account FROM BankAccounts 
+    WHERE account="000000000000"
     )
     BEGIN
         INSERT INTO BankAccounts

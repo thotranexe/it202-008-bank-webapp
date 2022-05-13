@@ -39,15 +39,13 @@ if(isset($account_id)) {
                     <div class="list-group-item">
                         <div>
                             <div>Amount:</div>
-                            <div><?php safer_echo($t["amount"]); ?></div>
+                            <div><?php safer_echo($t["balance_change"]); ?></div>
                         </div>
                         <div>
                             <div>Action Type:</div>
-                            <div><?php safer_echo($t["action_type"]); ?></div>
+                            <div><?php safer_echo($t["transaction_type"]); ?></div>
                         </div>
                         <div>
-                            <div>Memo:</div>
-                            <div><?php safer_echo($t["memo"]); ?></div>
                         </div>
                         <div>
                             <div>Created:</div>

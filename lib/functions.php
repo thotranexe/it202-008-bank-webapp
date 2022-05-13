@@ -25,5 +25,4 @@ require(__DIR__ . "/account_helpers.php");
 
 require(__DIR__ . "/get_or_create_account.php");
 
-
 ?>

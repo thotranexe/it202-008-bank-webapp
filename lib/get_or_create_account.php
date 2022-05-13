@@ -20,7 +20,7 @@ function get_or_create_account($accountnumb=NULL)
             $stmt->execute([":uid" => get_user_id()]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if($accountnumb!=NULL){
-                $query="SELECT account, balance,id from BankAccounts WHERE account=:accountnumb";
+                $query="SELECT id ,account, balance from BankAccounts WHERE account=:accountnumb";
                 $stmt=$db->prepare($query);
                 $stmt->execute([":accountnum"=>$accountnumb]);
                 $passnum=$stmt->fetch(PDO::FETCH_ASSOC);

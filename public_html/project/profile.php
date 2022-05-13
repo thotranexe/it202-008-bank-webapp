@@ -144,5 +144,5 @@ $username = get_username();
     }
 </script>
 <?php
-require_once(__DIR__ . "/../../partials/flash.php");
+require_once(__DIR__ . "/../../partials/footer.php");
 ?>

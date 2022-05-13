@@ -89,6 +89,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         } else {
                             $_SESSION["user"]["roles"] = []; //no roles
                         }
+                        get_or_create_account();
                         flash("Welcome, " . get_username());
                         die(header("Location: home.php"));
                     } else {
@@ -105,4 +106,4 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 }
 ?>
 <?php
-require(__DIR__ . "/../../partials/flash.php");
+require(__DIR__ . "/../../partials/footer.php");

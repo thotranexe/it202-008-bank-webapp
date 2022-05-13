@@ -2,7 +2,6 @@
 require(__DIR__ . "/../../partials/nav.php");
 require(__DIR__ . "/../../partials/dashboard_nav.php");
 is_logged_in(true);
-get_or_create_account();
 $db = getDB();
 $accNum = get_user_id();
 $query = "SELECT account From BankAccounts WHERE user_id='".$accNum."'";

@@ -3,7 +3,7 @@ require(__DIR__ . "/../../partials/nav.php");
 require(__DIR__ . "/../../partials/dashboard_nav.php");
 
 $db = getDB();
-$accNum = get_user_id();
+$accNum = get_user_account_id();
 $query = "SELECT id, account, balance, accType, created, modified from BankAccounts WHERE user_id='".$accNum."'";
 
 //$stmt = $db->prepare($query); 

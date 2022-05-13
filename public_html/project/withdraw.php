@@ -90,6 +90,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $nb=$cbal+$withdraw;
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
     $stmt->execute([":nb" => $nb,":account_withdrawing" => $account_withdrawing]);
+    flash("Your withdrawl was sucessful","sucess");
     get_or_create_account();
 }
 

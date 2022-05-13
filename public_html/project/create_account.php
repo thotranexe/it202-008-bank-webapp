@@ -88,9 +88,10 @@ if (isset($_POST["bal"]) && isset($_POST["account_type"])) {
 	    $stmt->bindValue(":tt", $tt);
 	    $stmt->bindValue(":exT2", $userChnge);
 	    $result = $stmt->execute();
+        flash("Account created!", "success");
     	echo var_export($result, true);
     	echo var_export($stmt->errorInfo(), true);
-        flash("Account created!", "success");
+        
 	    return $result;
         //$stmt = $db->prepare("UPDATE BankAccounts SET balance = :world WHERE user_id=-1");
         //$stmt->execute([":world" => $world]);

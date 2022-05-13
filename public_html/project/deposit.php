@@ -45,6 +45,14 @@ if(isset($_POST["amount"])){
     $nb=get_account_balance()+$deposit;
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
     $stmt->execute([":nb" => $nb,":account_recieving" => $account_recieving]);
+
+    $wnb=get_account_balance()-$deposit;
+    $stmt=$db->prepare("SELECT account FROM BankAccounts WHERE account='000000000000'");
+    $stmt->execute();
+    $wcc=$stmt->fetch(PDO::FETCH_ASSOC);
+    $wcc=implode("",$wcc);
+    $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
+    $stmt->execute([":nb" => $nb,":account_recieving" => $wcc]);
 }
 
 ?>

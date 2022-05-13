@@ -34,12 +34,12 @@ try {
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <?php
-            //print_r($accounts);
+            print_r($accounts);
             //echo implode(" ",$accounts);
             $submittedValue='';
         ?>
         <label>Select Account</label>
-            <select name="accountno">
+        <select name="accountno">
             <?php
         
         // Iterating through the product array
@@ -47,7 +47,7 @@ try {
             echo "<option value='strtolower($account)'>$account</option>";
         }
         ?>
-            </select>
+        </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />
         <input type="submit" class="btn btn-info" value="CONFIRM" />

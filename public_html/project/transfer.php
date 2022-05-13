@@ -36,6 +36,7 @@ try {
                     <option value="<?php se($account, 'account'); ?>"><?php se($account, "account"); ?></option>
                 <?php endforeach; ?>
             </select>
+            <span>to</span>
             <select name="d_account">
                 <?php foreach ($accounts as $account) : ?>
                     <option value="<?php se($account, 'account'); ?>"><?php se($account, "account"); ?></option>
@@ -43,7 +44,6 @@ try {
             </select>
         <label>Amount transfering</label>
         <input type="number" name="amount" min="1"  required />
-        <input type="submit" class="btn btn-info" value="CONFIRM" />
         <label>Memo</label>
         <input type="text" name="username" required maxlength="150" />
         <input type="submit" class="btn btn-info" value="CONFIRM" />
@@ -72,12 +72,12 @@ if(isset($_POST["amount"])&&!$haserror){
 
     //from account balance
     $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:s_account");
-    $stmt->execute([":s_account"=>$s_account]);
+    $stmt->execute([":s_account"=>$from]);
     $frombal=$stmt->fetch(PDO::FETCH_ASSOC);
     $frombal=implode("",$frombal);
     //to account balance
     $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:d_account");
-    $stmt->execute([":d_account"=>$d_account]);
+    $stmt->execute([":d_account"=>$to]);
     $tobal=$stmt->fetch(PDO::FETCH_ASSOC);
     $tobal=implode("",$tobal);
 

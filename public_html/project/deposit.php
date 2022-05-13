@@ -29,19 +29,17 @@ try {
 } catch (PDOException $e) {
     flash(var_export($e->errorInfo, true), "danger");
 }
-$accountno=array();
-foreach($accounts as $accounts){
-    array_push($accountno,$accounts["account"]);
-}
 ?>
 <h1> Deposit </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label>Select Account</label>
-            <select name="accountno">
-                <option value="2"></option>
-                <option value="3"></option>
-            </select>
+        <?
+        echo "<select name='select'>";
+                foreach($accounts as $account):
+                     echo "<option value='$account'>".$acount['account']."</option>";
+        echo "</select";
+        ?>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />
         <input type="submit" class="btn btn-info" value="CONFIRM" />

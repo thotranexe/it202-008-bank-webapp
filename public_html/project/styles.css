@@ -16,7 +16,7 @@
 nav li{display: block; background-color: rgba(53, 179, 201, 0.576);}
 nav li a{color: rgb(255, 255, 255)}
 input{
-  width: 100%;
+  width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;

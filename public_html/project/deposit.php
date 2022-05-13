@@ -22,9 +22,9 @@ try {
     $stmt->execute($params);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($results) {
-        print_r($results)
         $accounts = $results;
-    } else {
+    } 
+    else{
         flash("No matches found", "warning");
     }
 } catch (PDOException $e) {
@@ -34,12 +34,16 @@ try {
 <h1> Deposit </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
-        <label>Select Account</label>
-        <select name="accountno">
-        <?php foreach($accounts as $account): ?>
+        <?php
+            //print_r($accounts);
+            echo implode(" ",$accounts);
+            $submittedValue='';
+        ?>
+            <select name="user_account">
+        <?php foreach ($accounts as $account) : ?>
             <option value="<?php se($account, 'id'); ?>"><?php se($account, "account_number"); ?></option>
         <?php endforeach; ?>
-        </select>
+    </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />
         <input type="submit" class="btn btn-info" value="CONFIRM" />

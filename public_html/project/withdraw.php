@@ -73,24 +73,26 @@ if(isset($_POST["amount"])&&!$haserror){
     $world='000000000000';
     $tran_type='Withdraw';
     //transaction
-    $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
-    VALUES(:account_withdrawing,:world,:withdraw,:tran_type,:withdraw),(:world,:account_withdrawing,:wdraw,:tran_type,:wdraw)");
-    $stmt->bindValue(":world",$world);
-    $stmt->bindValue(":account_withdrawing",$account_withdrawing);
-    $stmt->bindValue(":withdraw",$withdraw);
-    $stmt->bindValue(":tran_type",$tran_type);
-    $stmt->bindValue(":withdraw",$withdraw);
-    $stmt->bindValue(":wdraw",$wdraw);
-    $stmt->execute();
     //uodating balances
-    $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:account_withdrawing");
-    $stmt->execute([":account_withdrawing"=>$account_withdrawing]);
     $cbal=$stmt->fetch(PDO::FETCH_ASSOC);
     $cbal=implode("",$cbal);
-    $nb=$cbal+$withdraw;
-    $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
-    $stmt->execute([":nb" => $nb,":account_withdrawing" => $account_withdrawing]);
-    flash("Your withdrawl was sucessful","sucess");
+    if($cbal>=$wdraw){
+        $nb=$cbal+$withdraw;
+        $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
+        VALUES(:account_withdrawing,:world,:withdraw,:tran_type,:withdraw),(:world,:account_withdrawing,:wdraw,:tran_type,:wdraw)");
+        $stmt->bindValue(":world",$world);
+        $stmt->bindValue(":account_withdrawing",$account_withdrawing);
+        $stmt->bindValue(":withdraw",$withdraw);
+        $stmt->bindValue(":tran_type",$tran_type);
+        $stmt->bindValue(":withdraw",$withdraw);
+        $stmt->bindValue(":wdraw",$wdraw);
+        $stmt->execute();
+        $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
+        $stmt->execute([":nb" => $nb,":account_withdrawing" => $account_withdrawing]);
+        flash("Your withdrawl of $wdraw was sucessful","sucess");
+    }else{
+        flash("FAILED TO WITHDRAW BALANCE LOW","danger");
+    }
     get_or_create_account();
 }
 

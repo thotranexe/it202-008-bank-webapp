@@ -81,7 +81,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $cbal=implode("",$cbal);
     $test=$cbal-$wdraw;
     print($test);
-    if(!$test<0){
+    if((int)$test>=0){
         $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
         VALUES(:account_withdrawing,:world,:withdraw,:tran_type,:withdraw),(:world,:account_withdrawing,:wdraw,:tran_type,:wdraw)");
         $stmt->bindValue(":world",$world);

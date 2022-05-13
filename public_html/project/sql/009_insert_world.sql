@@ -1,4 +1,5 @@
-IF NOT EXISTS(
+IF NOT EXISTS
+    (
     SELECT * FROM BankAccounts
     WHERE account='000000000000'
     )

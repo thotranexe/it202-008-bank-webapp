@@ -33,30 +33,30 @@ if(isset($account_id)) {
 ?>
     <h3>Transaction History</h3>
     <div class="results">
-        <?php // if ($transactions): ?>
+        <?php if ($transactions): ?>
             <div class="list-group">
                 <?php foreach ($transactions as $t): ?>
                     <div class="list-group-item">
                         <div>
-                            <div>Amount:</div>
-                            <div><?php safer_echo($t["balance_change"]); ?></div>
+                            <span>Amount:</span>
+                            <span><?php safer_echo($t["balance_change"]); ?></span>
                         </div>
                         <div>
-                            <div>Action Type:</div>
-                            <div><?php safer_echo($t["transaction_type"]); ?></div>
+                            <span>Transaction Type:</span>
+                            <span><?php safer_echo($t["transaction_type"]); ?></span>
                         </div>
                         <div>
                         </div>
                         <div>
-                            <div>Created:</div>
-                            <div><?php safer_echo($t["created"]); ?></div>
+                            <span>Created:</span>
+                            <span><?php safer_echo($t["created"]); ?></span>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
-        <?php //else: ?>
+        <?php else: ?>
             <p>No results</p>
-        <?php //endif; ?>
+        <?php endif; ?>
     </div>
 <?php
 require(__DIR__ . "/../../partials/footer.php");

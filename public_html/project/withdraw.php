@@ -64,10 +64,8 @@ if(isset($_POST["amount"])&&!$haserror){
     $db=getDB();
     $idNum = get_user_id();
     //get account
-    $stmt = $db->prepare("SELECT account FROM BankAccounts WHERE user_ID=:userID ORDER BY created DESC LIMIT 1");
-    $stmt->execute([":userID" => $idNum]);
-    $userAccount = $stmt->fetch(PDO::FETCH_ASSOC);
-    $userAccount = implode("",$userAccount);
+    $userAccount = se($_POST, "user_account", "", false);
+    $account_recieving= $userAccount;
 
     $account_withdrawing= $userAccount;
     $withdraw=-1*(int)se($_POST,"amount","",false);

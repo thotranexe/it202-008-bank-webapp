@@ -7,14 +7,12 @@ is_logged_in(true);
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label>Starting Deposit</label>
-        <input type="number" name="bal" required />
+        <input type="number" name="bal" min="1"  required />
         <input type="submit" class="btn btn-info" value="deposit" />
     </div>
 </form>
 <script>
     function validate(form) {
-        //TODO 1: implement JavaScript validation
-        //ensure it returns false for an error and true for success
         return true;
     }
 </script>

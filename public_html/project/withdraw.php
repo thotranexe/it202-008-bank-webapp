@@ -73,11 +73,15 @@ if(isset($_POST["amount"])&&!$haserror){
     $world='000000000000';
     $tran_type='Withdraw';
     //transaction
+ 
     //uodating balances
+    $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:account_withdrawing");
+    $stmt->execute([":account_withdrawing"=>$account_withdrawing]);
     $cbal=$stmt->fetch(PDO::FETCH_ASSOC);
     $cbal=implode("",$cbal);
-    if($cbal>=$wdraw){
-        $nb=$cbal+$withdraw;
+    $test=$cbal-$wdraw;
+    if(!$test<0){
+
         $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
         VALUES(:account_withdrawing,:world,:withdraw,:tran_type,:withdraw),(:world,:account_withdrawing,:wdraw,:tran_type,:wdraw)");
         $stmt->bindValue(":world",$world);
@@ -87,11 +91,14 @@ if(isset($_POST["amount"])&&!$haserror){
         $stmt->bindValue(":withdraw",$withdraw);
         $stmt->bindValue(":wdraw",$wdraw);
         $stmt->execute();
+
+        $nb=$cbal+$withdraw;
         $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_withdrawing");
         $stmt->execute([":nb" => $nb,":account_withdrawing" => $account_withdrawing]);
-        flash("Your withdrawl of $wdraw was sucessful","sucess");
-    }else{
-        flash("FAILED TO WITHDRAW BALANCE LOW","danger");
+        flash("Your withdrawl was sucessful","sucess");
+    }
+    else{
+        flash("Your withdrawl was not sucessful","danger");
     }
     get_or_create_account();
 }

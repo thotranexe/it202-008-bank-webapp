@@ -7,7 +7,7 @@ if (!is_logged_in()) {
     die(header("Location: login.php"));
 }
 
-$account_id = get_account_number();
+$account_id = (string)get_account_number();
 print($account_id);
 $db = getDB();
 

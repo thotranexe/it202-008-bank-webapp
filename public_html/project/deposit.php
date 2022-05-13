@@ -66,7 +66,7 @@ if(isset($_POST["amount"])){
     $tran_type='Deposit';
     //transaction
     $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
-    VALUES(:world,:account_recieving,:wdep,:tran_type,:wdepo),(:account_recieving,:world,:deposit,:tran_type,:deposit)");
+    VALUES(:world,:account_recieving,:wdepo,:tran_type,:wdepo),(:account_recieving,:world,:deposit,:tran_type,:deposit)");
     $stmt->bindValue(":world",$world);
     $stmt->bindValue(":account_recieving",$account_recieving);
     $stmt->bindValue(":deposit",$deposit);
@@ -85,8 +85,7 @@ if(isset($_POST["amount"])){
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
     $stmt->execute([":nb" => $nb,":account_recieving" => $account_recieving]);
     echo "<meta http-equiv='refresh' content='0'>";
-    flash("Your deposit of \$$nb was sucessful","sucess");
-
+    flash("BIG $$$","sucess");
     get_or_create_account();
 }
 

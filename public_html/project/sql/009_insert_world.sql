@@ -1,5 +1,2 @@
- IF not EXISTS(SELECT * FROM `BankAccounts`WHERE account='000000000000')
-BEGIN    
-    INSERT INTO `BankAccounts`(id,account,balance,created,modified)
-    VALUES (0,'000000000000',999999,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
-END
+INSERT INTO `BankAccounts`(id,account,balance,created,modified)
+VALUES (0,'000000000000',999999,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)

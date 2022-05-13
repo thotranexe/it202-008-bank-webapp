@@ -52,7 +52,7 @@ if(isset($_POST["amount"])){
     $wcc=$stmt->fetch(PDO::FETCH_ASSOC);
     $wcc=implode("",$wcc);
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
-    $stmt->execute([":nb" => $nb,":account_recieving" => $wcc]);
+    $stmt->execute([":nb" => $wnb,":account_recieving" => $wcc]);
 }
 
 ?>

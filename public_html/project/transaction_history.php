@@ -27,7 +27,7 @@ if(isset($account_id)) {
 ?>
     <h3>Transaction History</h3>
     <div class="results">
-        <?php if (count($transactions) > 0): ?>
+        <?php if ($transactions): ?>
             <div class="list-group">
                 <?php foreach ($transactions as $t): ?>
                     <div class="list-group-item">

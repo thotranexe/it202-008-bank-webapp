@@ -24,7 +24,7 @@ if(isset($_POST["amount"])){
     $world='000000000000';
     $tran_type='Deposit';
     $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, expected_total) 
-    VALUES($world,$account_recieving,$deposit,$tran_type,$deposit)");
+    VALUES(:world,:account_recieving,:deposit,:tran_type,:deposit)");
     $stmt->execute();
     $rec_nb=$_SESSION['balance']+$deposit;
 }

@@ -40,7 +40,7 @@ try {
         ?>
             <select name="user_account">
         <?php foreach ($accounts as $account) : ?>
-            <option value="<?php se($account, 'id'); ?>"><?php se($account, "account_number"); ?></option>
+            <option value="<?php se($account, 'account'); ?>"><?php se($account, "account"); ?></option>
         <?php endforeach; ?>
     </select>
         <label>Amount Depositing</label>

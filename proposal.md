@@ -8,7 +8,7 @@
 <!-- Line item / Feature template (use this for each bullet point) -- DO NOT DELETE THIS SECTION
 
 
-- [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+- [ ] \(05/13/2022 of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
   -  Link to related .md file: [Link Name](link url)
 
  End Line item / Feature Template -- DO NOT DELETE THIS SECTION --> 
@@ -27,14 +27,14 @@
   - [ ] \(04/03/2022 of completion) See their profile
   - [ ] \(04/03/2022 of completion) Edit their profile
 - Milestone 2
-  - [ ] \(mm/dd/yyyy of completion) Accounts table
-  - [ ] \(mm/dd/yyyy of completion) Transaction table
-  - [ ] \(mm/dd/yyyy of completion) Dashboard Page
-  - [ ] \(mm/dd/yyyy of completion) Create Checkings Account
-  - [ ] \(mm/dd/yyyy of completion) Users can list their accounts
-  - [ ] \(mm/dd/yyyy of completion) Be able to withdraw/deposit
-  - [ ] \(mm/dd/yyyy of completion) Create a User if doesnt exist/ World Account(initial scripts)
-  - [ ] \(mm/dd/yyyy of completion) Users can click for more information(transactions)
+  - [ ] \(05/13/2022 of completion) Accounts table
+  - [ ] \(05/13/2022 of completion) Transaction table
+  - [ ] \(05/13/2022 of completion) Dashboard Page
+  - [ ] \(05/13/2022 of completion) Create Checkings Account
+  - [ ] \(05/13/2022 of completion) Users can list their accounts
+  - [ ] \(05/13/2022 of completion) Be able to withdraw/deposit
+  - [ ] \(05/13/2022 of completion) Create a User if doesnt exist/ World Account(initial scripts)
+  - [ ] \(05/13/2022 of completion) Users can click for more information(transactions)
 - Milestone 3
   - (duplicate template here for Milestone 1 features)
 - Milestone 4

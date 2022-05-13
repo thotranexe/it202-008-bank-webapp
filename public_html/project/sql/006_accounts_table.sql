@@ -10,4 +10,5 @@ CREATE TABLE IF NOT EXISTS BankAccounts(
     check (balance >= 0 AND LENGTH(account) = 12),
 
     FOREIGN KEY (user_id) REFERENCES Users(id)
+    FOREIGN KEY (accType) REFERENCES AccountType(id)
 )

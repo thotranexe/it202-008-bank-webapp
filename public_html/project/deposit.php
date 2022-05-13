@@ -7,7 +7,7 @@ is_logged_in(true);
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label>Starting Deposit</label>
-        <input type="number" name="bal" min="1"  required />
+        <input type="number" name="$" min="1"  required />
         <input type="submit" class="btn btn-info" value="deposit" />
     </div>
 </form>

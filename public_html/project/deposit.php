@@ -22,7 +22,7 @@ try {
     $stmt->execute($params);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($results) {
-        print_r($results);
+        print_r($results)
         $accounts = $results;
     } else {
         flash("No matches found", "warning");
@@ -34,20 +34,11 @@ try {
 <h1> Deposit </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
-        <?php
-            //print_r($accounts);
-            //echo implode(" ",$accounts);
-            $submittedValue='';
-        ?>
         <label>Select Account</label>
         <select name="accountno">
-            <?php
-        
-        // Iterating through the product array
-        foreach($accounts as $account){
-            echo "<option value='strtolower($account)'>$account</option>";
-        }
-        ?>
+        <?php foreach($accounts as $account): ?>
+            <option value="<?php se($account, 'id'); ?>"><?php se($account, "account_number"); ?></option>
+        <?php endforeach; ?>
         </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />

@@ -55,7 +55,7 @@ try {
 </script>
 <?php
 $haserror=false;
-get_or_create_account();
+get_or_create_account(se($_POST, "user_account", "", false));
 if(((int)se($_POST,"amount","",false))>get_account_balance()){
     $haserror=true;
     flash("You dont have enough money to withdraw that amount","danger");

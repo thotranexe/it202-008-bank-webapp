@@ -28,7 +28,7 @@ if(isset($account_id)) {
 ?>
     <h3>Transaction History</h3>
     <div class="results">
-        <?php if ($transactions): ?>
+        <?php // if ($transactions): ?>
             <div class="list-group">
                 <?php foreach ($transactions as $t): ?>
                     <div class="list-group-item">
@@ -51,9 +51,9 @@ if(isset($account_id)) {
                     </div>
                 <?php endforeach; ?>
             </div>
-        <?php else: ?>
+        <?php //else: ?>
             <p>No results</p>
-        <?php endif; ?>
+        <?php //endif; ?>
     </div>
 <?php
 require(__DIR__ . "/../../partials/footer.php");

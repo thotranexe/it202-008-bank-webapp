@@ -33,10 +33,13 @@ try {
 <h1> Deposit </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
+        <?php
+            print($accounts)
+        ?>
         <label>Select Account</label>
             <select name="accountno">
-                <option value=$accountno[0]>Checking</option>
-                <option value=$accountno[1]>Savings</option>
+                <option value='.$accounts[0]'>Checking</option>
+                <option value='$accounts[1]'>Savings</option>
             </select>
         <label>Amount Depositing</label>
         <input type="number" name="amount" min="1"  required />

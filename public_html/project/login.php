@@ -91,6 +91,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         }
                         get_or_create_account();
                         flash("Welcome, " . get_username());
+                        is_logged_in(true);
                         die(header("Location: home.php"));
                     } else {
                         flash("Invalid password");

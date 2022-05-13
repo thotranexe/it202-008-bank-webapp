@@ -1,0 +1,2 @@
+INSERT INTO `BankAccounts`(id,account,balance,created,modified)
+VALUES (0,'000000000000',999999,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)

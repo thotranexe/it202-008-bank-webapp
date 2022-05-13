@@ -78,6 +78,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                         //flash("Weclome $email");
                         $_SESSION["user"] = $user; //sets our session data from db
                         //lookup potential roles
+                        //get or create 
+                        get_or_create_account();
                         $stmt = $db->prepare("SELECT Roles.name FROM Roles 
                         JOIN UserRoles on Roles.id = UserRoles.role_id 
                         where UserRoles.user_id = :user_id and Roles.is_active = 1 and UserRoles.is_active = 1");
@@ -105,4 +107,4 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 }
 ?>
 <?php
-require(__DIR__ . "/../../partials/flash.php");
+require(__DIR__ . "/../../partials/footer.php");

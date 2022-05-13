@@ -1,14 +1,14 @@
 # Project Name: Simple Bank
 ## Project Summary: This project will create a bank simulation for users. They’ll be able to have various accounts, do standard bank functions like deposit, withdraw, internal (user’s accounts)/external(other user’s accounts) transfers, and creating/closing 
 ## Github Link: https://github.com/thotranexe/it202-008/tree/prod
-## Project Board Link: https://github.com/thotranexe/it202-008/projects/1
+## Project Board Link: https://github.com/thotranexe/it202-008/projects/2
 ## Website Link: (Heroku Prod of Project folder)
 ## Your Name: Tho Tran
 
 <!-- Line item / Feature template (use this for each bullet point) -- DO NOT DELETE THIS SECTION
 
 
-- [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+- [ ] \(05/13/2022 of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
   -  Link to related .md file: [Link Name](link url)
 
  End Line item / Feature Template -- DO NOT DELETE THIS SECTION --> 
@@ -17,17 +17,24 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-  - [ ] \(mm/dd/yyyy of completion) Register New Account
-  - [ ] \(mm/dd/yyyy of completion) Login to Account
-  - [ ] \(mm/dd/yyyy of completion) Log out of Account
-  - [ ] \(mm/dd/yyyy of completion) Basic security measures
-  - [ ] \(mm/dd/yyyy of completion) Basic Roles
-  - [ ] \(mm/dd/yyyy of completion) Basic Styles
-  - [ ] \(mm/dd/yyyy of completion) Output is user friendly
-  - [ ] \(mm/dd/yyyy of completion) See their profile
-  - [ ] \(mm/dd/yyyy of completion) Edit their profile
+  - [ ] \(04/03/2022 of completion) Register New Account
+  - [ ] \(04/03/2022 of completion) Login to Account
+  - [ ] \(04/03/2022 of completion) Log out of Account
+  - [ ] \(04/03/2022 of completion) Basic security measures
+  - [ ] \(04/03/2022 of completion) Basic Roles
+  - [ ] \(04/03/2022 of completion) Basic Styles
+  - [ ] \(04/03/2022 of completion) Output is user friendly
+  - [ ] \(04/03/2022 of completion) See their profile
+  - [ ] \(04/03/2022 of completion) Edit their profile
 - Milestone 2
-  - (duplicate template here for Milestone 1 features)
+  - [ ] \(05/13/2022 of completion) Accounts table
+  - [ ] \(05/13/2022 of completion) Transaction table
+  - [ ] \(05/13/2022 of completion) Dashboard Page
+  - [ ] \(05/13/2022 of completion) Create Checkings Account
+  - [ ] \(05/13/2022 of completion) Users can list their accounts
+  - [ ] \(05/13/2022 of completion) Be able to withdraw/deposit
+  - [ ] \(05/13/2022 of completion) Create a User if doesnt exist/ World Account(initial scripts)
+  - [ ] \(05/13/2022 of completion) Users can click for more information(transactions)
 - Milestone 3
   - (duplicate template here for Milestone 1 features)
 - Milestone 4

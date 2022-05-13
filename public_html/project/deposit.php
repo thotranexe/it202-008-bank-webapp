@@ -19,7 +19,15 @@ is_logged_in(true);
 <?php
 if(isset($_POST["amount"])){
     $db=getDB();
-    $account_recieving= $_SESSION['account'];
+
+    $idNum = get_user_id();
+
+    $stmt = $db->prepare("SELECT account FROM BankAccounts WHERE user_ID=:userID ORDER BY created DESC LIMIT 1");
+    $stmt->execute([":userID" => $idNum]);
+    $userAccount = $stmt->fetch(PDO::FETCH_ASSOC);
+    $userAccount = implode("",$userAccount);
+
+    $account_recieving= $userAccount;
     $deposit=(int)se($_POST,"amount","",false);
     $world='000000000000';
     $tran_type='Deposit';

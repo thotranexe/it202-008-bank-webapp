@@ -99,7 +99,7 @@ if(isset($_POST["amount"])&&!$haserror){
         $stmt->bindValue(":memo",$mem);
         $stmt->bindValue(":inverse",$transfer);
         $stmt->bindValue(":expected_total",$s_nb);
-        $stmt->bindValue(":excpected_nb",$d_nb);
+        $stmt->bindValue(":expected_nb",$d_nb);
         $stmt->execute();
         //update balance
         $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");

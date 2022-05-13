@@ -18,7 +18,7 @@ is_logged_in(true);
 </script>
 <?php
 $haserror=false;
-if(!isset($_POST,"ammount","",false)){
+if(isset($_POST,"ammount","",false)){
     $haserror=true;
     flash("dude put in an amount");
 }

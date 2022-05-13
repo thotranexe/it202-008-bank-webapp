@@ -35,8 +35,7 @@ try {
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <?php
-            //print_r($accounts);
-            echo implode(" ",$accounts);
+
             $submittedValue='';
         ?>
             <select name="user_account">

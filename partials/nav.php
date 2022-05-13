@@ -29,18 +29,20 @@ session_start();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<?php echo get_url('styles.css'); ?>">
 <script src="<?php echo get_url('helpers.js'); ?>"></script>
-<nav class="navbar navbar-expand-lg navbar-light  bg-light">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">MakeAndBank</a>
+        <a class="navbar-brand" href="#">Banky Bank</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <?php if (is_logged_in()) : ?>
-
-                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('profile.php'); ?>">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('dashboard.php'); ?>">Dashboard</a></li>
                 <?php endif; ?>
+                <?php if (is_logged_in()) : ?>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('profile.php'); ?>">Profile</a></li>
+                    <?php endif; ?>
                 <?php if (!is_logged_in()) : ?>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('login.php'); ?>">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('register.php'); ?>">Register</a></li>
@@ -62,9 +64,11 @@ session_start();
                 <?php endif; ?>
             </ul>
             <!-- this is what changed for this gist -->
-            <span class="navbar-text show-balance">
-                Test Placeholder, should get replaced if balance.php loads and works
-            </span>
+            <?php if (is_logged_in()) : ?>
+                <span class="navbar-text show-balance">
+                    Test Placeholder, should get replaced if balance.php loads and works
+                </span>
+            <?php endif; ?>
         </div>
     </div>
 </nav>

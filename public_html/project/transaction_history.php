@@ -7,9 +7,7 @@ if (!is_logged_in()) {
     die(header("Location: login.php"));
 }
 
-if(isset($_GET["id"])){
-    $account_id = $_GET["id"];
-}
+$account_id = get_user_id();
 
 $db = getDB();
 

@@ -55,12 +55,11 @@ try {
 </script>
 <?php
 $haserror=false;
-$_SESSION["user"]["account"] = se($_POST, "user_account", "", false);
 get_or_create_account();
-if(((int)se($_POST,"amount","",false))>get_account_balance()){
+/*if(((int)se($_POST,"amount","",false))>get_account_balance()){
     $haserror=true;
     flash("You dont have enough money to withdraw that amount","danger");
-}
+}*/
 if(isset($_POST["amount"])&&!$haserror){
     $db=getDB();
     $idNum = get_user_id();

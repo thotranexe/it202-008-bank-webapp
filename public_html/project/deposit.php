@@ -97,8 +97,7 @@ if(isset($_POST["amount"])){
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
     $stmt->execute([":nb" => $wnb,":account_recieving" => $wcc])*/
 }
+?>
 
-?>
 <?php
-require(__DIR__ . "/../../partials/footer.php");
-?>
+require(__DIR__ . "/../../partials/footer.php");?>

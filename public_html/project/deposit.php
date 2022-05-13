@@ -29,9 +29,9 @@ try {
 } catch (PDOException $e) {
     flash(var_export($e->errorInfo, true), "danger");
 }
-$accountno=array();
+$accountno=[];
 foreach($accounts as $accounts){
-    array_push($account_no,$accounts["account"]);
+    array_push($accountno,$accounts["account"]);
 }
 ?>
 <h1> Deposit </h1>

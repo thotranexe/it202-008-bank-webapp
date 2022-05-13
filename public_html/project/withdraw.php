@@ -18,11 +18,7 @@ is_logged_in(true);
 </script>
 <?php
 $haserror=false;
-if(isset($_POST["amount"])){
-    $haserror=true;
-    flash("dude put in an amount");
-}
-elseif(((int)se($_POST,"amount","",false))>get_account_balance()){
+if(((int)se($_POST,"amount","",false))>get_account_balance()){
     $haserror=true;
     flash("You dont have enough money to withdraw that amount","danger");
 }

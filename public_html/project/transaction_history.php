@@ -8,7 +8,7 @@ if (!is_logged_in()) {
 }
 
 $account_id = get_account_number();
-
+print($account_id);
 $db = getDB();
 
 if(isset($account_id)) {

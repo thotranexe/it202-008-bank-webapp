@@ -1,8 +1,8 @@
 IF NOT EXISTS(
-    SELECT account FROM BankAccounts 
-    WHERE account="000000000000"
+    SELECT `account` FROM `BankAccounts` 
+    WHERE `account`='000000000000'
     )
     BEGIN
-        INSERT INTO BankAccounts
+        INSERT INTO `BankAccounts`
         VALUES(0,"000000000000",0,999999,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
     END

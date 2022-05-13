@@ -45,7 +45,7 @@ if(isset($_POST["amount"])){
     $nb=get_account_balance()+$deposit;
     $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_recieving");
     $stmt->execute([":nb" => $nb,":account_recieving" => $account_recieving]);
-
+    echo "<meta http-equiv='refresh' content='0'>";
     /*$stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account='000000000000'");
     $stmt->execute();
     $wcbal=$stmt->fetch(PDO::FETCH_ASSOC);

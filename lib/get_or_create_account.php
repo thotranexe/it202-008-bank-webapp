@@ -23,7 +23,7 @@ function get_or_create_account()
                 //account doesn't exist, create it
                 try {
                     //my table should automatically create the account number so I just need to assign the user
-                    $query = "INSERT INTO RM_Accounts (user_id) VALUES (:uid)";
+                    $query = "INSERT INTO BankAccounts (user_id) VALUES (:uid)";
                     $user_id = get_user_id(); //caching a reference
                     $stmt = $db->prepare($query);
                     $stmt->execute([":uid" => $user_id]);

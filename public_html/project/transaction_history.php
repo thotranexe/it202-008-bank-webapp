@@ -35,7 +35,9 @@ $query="SELECT * FROM Transactions WHERE acc_source=:accountnum OR acc_destinati
 foreach($accounts as $accountno){
     $number=se($accountno, "account");
     $stmt=$db->prepare($query);
-    $stmt->execute(["acc_source"=>$number,"acc_destination"=>$number]);
+    $stmt->bindValues("acc_source",$number);
+    $stmt->bindValues("acc_destination",$number);
+    $stmt->execute();
     $tran_hist=$stmt->fetchALL(PDO::FETCH_ASSOC);
     print_r($trans_hist);
 }

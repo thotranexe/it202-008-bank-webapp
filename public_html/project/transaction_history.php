@@ -69,7 +69,7 @@ $userAccount=se($_POST,"s_account","",false);
 $start=(se($_POST,"start","",false))." 00:00:00";
 $end=(se($_POST,"end","",false))." 23:59:59";
 $ttype=se($_POST,"t_type","ALL",false);
-print($ttype);
+//print($ttype);
 //print($start);
 //print($end);
 if(isset($userAccount)){
@@ -83,18 +83,22 @@ if(isset($userAccount)){
         if(strcmp($ttype,"ALL")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+            flash("Viewing all between $start and $end","alert");
         }
         if(strcmp($ttype,"Deposit")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Deposit') LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+            flash("Viewing deposits between $start and $end","alert");
         }
         if(strcmp($ttype,"Withdraw")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Withdraw') LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+            flash("Viewing withdraws between $start and $end","alert");
         }
         if(strcmp($ttype,"Transfer")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Transfer') LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+            flash("Viewing transfers between $start and $end","alert");
         }
     }
     if ($r) {

@@ -41,9 +41,9 @@ $query = "SELECT account From BankAccounts Where "
             <span>to</span>
         <label>Account Destination ID Last 4</label>
         <input type="text" name="last_4"/>
-        <label>Last Name</label>
+        <div><label>Last Name</label></div>
         <input type="text" name="last_name"/>
-        <label>Amount transfering</label>
+        <div><label>Amount transfering</label></div>
         <input type="number" name="amount" min="1"  required />
         <div>
             <label>Memo</label>
@@ -90,7 +90,8 @@ if(isset($_POST["amount"])&&!$haserror){
         $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:d_account");
         $stmt->execute([":d_account"=>$to]);
         $tobal=$stmt->fetch(PDO::FETCH_ASSOC);
-        $tobal=implode("",$tobal);
+        //$tobal=implode("",$tobal);
+        $tobal=(int)se($tobal,null,"",false);
 
         $s_nb=$frombal-$transfer;
         $d_nb=$tobal+$transfer;

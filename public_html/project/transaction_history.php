@@ -41,7 +41,7 @@ try {
             <label>Filter by date</label>
             <span>Start:</span>
             <input type="date" name="start"/>
-            <span>End:</span>
+            <div><span>End:</span></div>
             <input type="data" name="end"/>
         </div>
         <input type="submit" class="btn btn-info" value="CONFIRM" />

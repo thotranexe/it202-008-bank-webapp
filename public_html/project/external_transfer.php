@@ -80,7 +80,7 @@ if(isset($_POST["amount"])&&!$haserror){
         $stmt->execute([":id"=>$to_id]);
         $toaccount=$stmt->fetch(PDO::FETCH_ASSOC);
         $to=se($toaccount,"account","",false);
-        print($to);
+        print($to."_hello_");
         if($to!=""){
             $transfer=(int)se($_POST,"amount","",false);
             $inverse=-1*$transfer;

@@ -74,7 +74,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
     se($result,"id","",true);
     if($result){
-        $to=se($result['id'],"id","",false);
+        $to=se($result,"id","",false);
     }
     else{
         flash("no accounts found","danger");

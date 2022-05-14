@@ -71,9 +71,12 @@ if(isset($_POST["amount"])&&!$haserror){
     $query=("SELECT a.id FROM Users u JOIN BankAccounts a on u.id = a.user_id WHERE u.last_name = :last_name AND a.account LIKE :last_4 LIMIT 1");
     $stmt=$db->prepare($query);
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
-    if($stmt){
-        $result=$stmt->fetch(PDO::FETCH_ASSOC);
+    $result=$stmt->fetch(PDO::FETCH_ASSOC);
+    if($result){
         $to=$result['id'];
+    }
+    else{
+        flash("no accounts found","danger");
     }
     if($from!=$to){
         $transfer=(int)se($_POST,"amount","",false);

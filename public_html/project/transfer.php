@@ -88,7 +88,7 @@ if(isset($_POST["amount"])&&!$haserror){
         $s_nb=$frombal-$transfer;
         $d_nb=$tobal+$transfer;
 
-        //print($test);
+        print($test);
         if((int)$test>=0){
         //first update from account
             $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, memo, expected_total) 

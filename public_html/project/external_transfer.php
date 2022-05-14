@@ -68,12 +68,13 @@ if(isset($_POST["amount"])&&!$haserror){
     $last_name = $_POST["last_name"];
     $last_4 = $_POST["last_4"];
     $mem = se($_POST, "message", "", false);
-    $query=("SELECT a.id FROM Users u JOIN BankAccounts a on u.id = a.user_id WHERE u.last_name = :last_name AND a.account LIKE :last_4 LIMIT 1");
+    $query=("SELECT a.id FROM Users u JOIN BankAccounts a on u.id = a.user_id WHERE (u.last_name = :last_name) AND (a.account LIKE :last_4)");
     $stmt=$db->prepare($query);
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
+    se($result['id'],"","",true);
     if($result){
-        $to=$result['id'];
+        $to=se($result['id'],"","",false);
     }
     else{
         flash("no accounts found","danger");

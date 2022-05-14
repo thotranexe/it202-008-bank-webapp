@@ -65,7 +65,7 @@ $end=(se($_POST,"end","",false))." 23:59:59";
 //print($end);
 if(isset($userAccount)){
     if(empty($start)&&empty($end)){
-        print("they are empty\n")
+        print("they are empty\n");
         $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
         $r = $stmt->execute([":account_id" => $userAccount]);
     }else{

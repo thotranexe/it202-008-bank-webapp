@@ -38,8 +38,11 @@ try {
                 <?php endforeach; ?>
             </select>
     <div>
-            <label>Memo</label>
-            <input type="text" name="message" required maxlength="150" />
+            <label>Filter by date</label>
+            <span>Start:</span>
+            <input type="date" name="start"/>
+            <span>End:</span>
+            <input type="data" name="end"/>
         </div>
         <input type="submit" class="btn btn-info" value="CONFIRM" />
     </div>
@@ -56,10 +59,16 @@ if (!is_logged_in()) {
 }
 
 $userAccount =se($_POST,"s_account","",false);
+$start=strtotime(se($_POST,"start","",false));
+$end=strtotime(se($_POST,"end","",false));
 
 if(isset($userAccount)){
 
     $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
+    if(isset($start)&&isset($end)){
+        $stmt=$db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (account_src = :account_id) AND ( created BETWEEN :daystart AND :dayend)) LIMIT 10");
+        $r = $stmt->execute(["account_id" => $userAccount,"daystart"=>$start, "dayend"=>$end]);
+    }
     $r = $stmt->execute(["account_id" => $userAccount]);
     if ($r) {
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -41,6 +41,8 @@ if (isset($_POST["save"])) {
             //$_SESSION["user"] = $user;
             $_SESSION["user"]["email"] = $user["email"];
             $_SESSION["user"]["username"] = $user["username"];
+            $_SESSION["user"]["first_name"]=$user["first_name"];
+            $_SESSION["user"]["last_name"]=$user["last_name"];
         } else {
             flash("User doesn't exist", "danger");
         }
@@ -92,6 +94,7 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
+$id=get_user_id();
 $db=getDB();
 $stmt=$db->prepare("SELECT first_name, last_name FROM Users Where id=:id");
 $stmt->execute([":id"=>$id]);

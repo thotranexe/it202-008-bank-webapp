@@ -92,6 +92,7 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
+$db=getDB();
 $stmt=$db->prepare("SELECT first_name, last_name FROM Users Where id=:id");
 $stmt->execute([":id"=>$id]);
 $full=$stmt->fetch(PDO::FETCH_ASSOC);

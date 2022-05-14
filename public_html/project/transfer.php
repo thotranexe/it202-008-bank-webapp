@@ -67,7 +67,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $to = se($_POST, "d_account", "", false);
     $mem = se($_POST, "message", "", false);
 
-    if(strcmp($from,$to)<0){
+    if($from!=$to){
         $transfer=(int)se($_POST,"amount","",false);
         $inverse=-1*$transfer;
         $tran_type='Transfer';
@@ -88,7 +88,7 @@ if(isset($_POST["amount"])&&!$haserror){
         $s_nb=$frombal-$transfer;
         $d_nb=$tobal+$transfer;
 
-        //print($test);
+        print($test);
         if((int)$test>=0){
         //first update from account
             $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, memo, expected_total) 
@@ -108,11 +108,13 @@ if(isset($_POST["amount"])&&!$haserror){
             $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
             $stmt->execute([":nb" => $d_nb,":account_transfering" => $to]);
             flash("Your transfer was sucessful","success");
-        }else{
+        }
+        else{
             flash("balance too low","danger");
         }
     }
-    else{
+    else
+    {
         flash("Same Account","danger");
     }
     get_or_create_account();

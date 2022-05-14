@@ -42,10 +42,10 @@ try {
             <input type="date" id="end" name="end"required/>
             <label>Select Account Type</label>
             <select name="t_type">
-            <option value="ALL">All</option>
-            <option value="Deposit">Deposit</option>
-            <option value="Withdraw">Withdraw</option>
-            <option value="Transfer">Transfer</option>
+                <option value="ALL">All</option>
+                <option value="Deposit">Deposit</option>
+                <option value="Withdraw">Withdraw</option>
+                <option value="Transfer">Transfer</option>
             </select>
         </div>
         <input type="submit" class="btn btn-info" value="CONFIRM" />

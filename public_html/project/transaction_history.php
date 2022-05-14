@@ -73,6 +73,8 @@ $ttype=se($_POST,"t_type","ALL",false);
 //print($start);
 //print($end);
 if(isset($userAccount)){
+    $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
+    $r = $stmt->execute([":account_id" => $userAccount]);
     if(empty($start)&&empty($end)){
         print("they are empty\n");
         $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
@@ -83,22 +85,22 @@ if(isset($userAccount)){
         if(strcmp($ttype,"ALL")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
-            flash("Viewing all between $start and $end","alert");
+            flash("Viewing all between $start and $end","info");
         }
         if(strcmp($ttype,"Deposit")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Deposit') LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
-            flash("Viewing deposits between $start and $end","alert");
+            flash("Viewing deposits between $start and $end","info");
         }
         if(strcmp($ttype,"Withdraw")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Withdraw') LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
-            flash("Viewing withdraws between $start and $end","alert");
+            flash("Viewing withdraws between $start and $end","info");
         }
         if(strcmp($ttype,"Transfer")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Transfer') LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
-            flash("Viewing transfers between $start and $end","alert");
+            flash("Viewing transfers between $start and $end","info");
         }
     }
     if ($r) {

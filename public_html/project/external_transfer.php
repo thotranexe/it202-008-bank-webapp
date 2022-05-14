@@ -75,7 +75,7 @@ if(isset($_POST["amount"])&&!$haserror){
     print(se($result,"id","",false));
     if($result){
         $to_id=se($result,"id","",false);
-        $stmt->prepare("SELECT account FROM BankAccounts WHERE id=:id");
+        $stmt=$db->prepare("SELECT account FROM BankAccounts WHERE id=:id");
         $stmt->execute([":id"=>$to_id]);
         $toaccount=$stmt->fetch(PDO::FETCH_ASSOC);
         $to=se($toaccount,"account","",false);

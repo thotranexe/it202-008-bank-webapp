@@ -54,7 +54,7 @@ if (isset($_POST["save"])) {
     if(!empty($fname)&&!empty($lname)){
         print("in update statement");
         $stmt=$db->prepare("UPDATE Users set first_name=:fname,last_name=:lname where id=:id");
-        $stmt->execute([":fname"=>$fname,":lname"=>$lname,":id"=>$id]);
+        $stmt->execute([":fname"=>$fname,":lname"=>$lname,":id"=>get_user_id()]);
     }
 
     //check/update password

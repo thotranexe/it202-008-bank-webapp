@@ -96,11 +96,15 @@ if (isset($_POST["save"])) {
 $email = get_user_email();
 $username = get_username();
 $id=get_user_id();
+
 $db=getDB();
-$stmt=$db->prepare("SELECT first_name, last_name FROM Users Where id=:id");
+$stmt=$db->prepare("SELECT first_name FROM Users Where id=:id");
 $stmt->execute([":id"=>$id]);
-$full=$stmt->fetchAll(PDO::FETCH_ASSOC);
+$full=$stmt->fetch(PDO::FETCH_ASSOC);
 $first=se($full["first_name"],null,"",false);
+
+$stmt=$db->prepare("SELECT last_name FROM Users Where id=:id");
+$stmt->execute([":id"=>$id]);
 $last=se($full["last_name"],null,"",false);
 $name=$first.", ".$last;
 ?>

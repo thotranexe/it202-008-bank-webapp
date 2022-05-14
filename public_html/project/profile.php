@@ -99,7 +99,7 @@ $id=get_user_id();
 $db=getDB();
 $stmt=$db->prepare("SELECT first_name, last_name FROM Users Where id=:id");
 $stmt->execute([":id"=>$id]);
-$full=$stmt->fetch(PDO::FETCH_ASSOC);
+$full=$stmt->fetchAll(PDO::FETCH_ASSOC);
 $first=se($full["first_name"],null,"",false);
 $last=se($full["last_name"],null,"",false);
 $name=$first.", ".$last;

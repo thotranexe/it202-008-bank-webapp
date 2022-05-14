@@ -43,6 +43,13 @@ try {
             <input type="date" id="start" name="start" required/>
             <div>End:</div>
             <input type="date" id="end" name="end"required/>
+            <label>Select Account Type</label>
+            <select name="t_type">
+            <option value="Deposit">Deposit</option>
+            <option value="Withdraw">Withdraw</option>
+            <option value="Transfer">Transfer</option>
+            <option value="ALL">All</option>
+            </select>
         </div>
         <input type="submit" class="btn btn-info" value="CONFIRM" />
     </div>
@@ -61,6 +68,7 @@ if (!is_logged_in()) {
 $userAccount=se($_POST,"s_account","",false);
 $start=(se($_POST,"start","",false))." 00:00:00";
 $end=(se($_POST,"end","",false))." 23:59:59";
+$ttype=se($_POST,"t_type","ALL",false);
 //print($start);
 //print($end);
 if(isset($userAccount)){
@@ -68,9 +76,25 @@ if(isset($userAccount)){
         print("they are empty\n");
         $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
         $r = $stmt->execute([":account_id" => $userAccount]);
-    }else{
-        $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) LIMIT 10");
-        $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+    }
+    else
+    {
+        if(strcmp($ttype,"ALL")>0){
+            $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) LIMIT 10");
+            $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+        }
+        if(strcmp($ttype,"Deposit")>0){
+            $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Deposit') LIMIT 10");
+            $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+        }
+        if(strcmp($ttype,"Withdraw")>0){
+            $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Withdraw') LIMIT 10");
+            $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+        }
+        if(strcmp($ttype,"Transfer")>0){
+            $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) AND (transaction_type='Transfer') LIMIT 10");
+            $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);
+        }
     }
     if ($r) {
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);

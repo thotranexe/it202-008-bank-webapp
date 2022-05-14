@@ -73,8 +73,6 @@ $ttype=se($_POST,"t_type","ALL",false);
 //print($start);
 //print($end);
 if(isset($userAccount)){
-    $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
-    $r = $stmt->execute([":account_id" => $userAccount]);
     if(empty($start)&&empty($end)){
         print("they are empty\n");
         $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");

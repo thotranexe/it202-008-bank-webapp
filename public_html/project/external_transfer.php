@@ -72,7 +72,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $stmt=$db->prepare($query);
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
-    se($result['id'],"id");
+    se($result,"id","",true);
     if($result){
         $to=se($result['id'],"id","",false);
     }

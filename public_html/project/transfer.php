@@ -67,7 +67,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $to = se($_POST, "d_account", "", false);
     $mem = se($_POST, "message", "", false);
 
-    if(strcmp($from,$to)<0){
+    if($from!=$to){
         $transfer=(int)se($_POST,"amount","",false);
         $inverse=-1*$transfer;
         $tran_type='Transfer';

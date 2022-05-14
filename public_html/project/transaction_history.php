@@ -69,6 +69,7 @@ $userAccount=se($_POST,"s_account","",false);
 $start=(se($_POST,"start","",false))." 00:00:00";
 $end=(se($_POST,"end","",false))." 23:59:59";
 $ttype=se($_POST,"t_type","ALL",false);
+print($ttype);
 //print($start);
 //print($end);
 if(isset($userAccount)){

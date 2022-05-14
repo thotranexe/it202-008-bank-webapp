@@ -29,9 +29,6 @@ try {
 <h1> PICK YOUR ACCOUNT </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
-        <?php
-            $submittedValue='';
-        ?>
             <select name="s_account">
                 <?php foreach ($accounts as $account) : ?>
                     <option value="<?php se($account, 'account'); ?>"><?php se($account, "account"); ?></option>

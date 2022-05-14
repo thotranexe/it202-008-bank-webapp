@@ -1,25 +1,63 @@
-<?php require(__DIR__ . "/../../partials/nav.php");
-require(__DIR__ . "/../../partials/dashboard_nav.php");?>
 <?php
+require(__DIR__ . "/../../partials/nav.php");
+require(__DIR__ . "/../../partials/dashboard_nav.php");
+is_logged_in(true);
+get_or_create_account();
+$db = getDB();
+$accNum = get_user_id();
+$query = "SELECT account From BankAccounts WHERE user_id='".$accNum."'";
 
+$params = null;
+$query .= " ORDER BY modified desc LIMIT 5";
+
+$stmt = $db->prepare($query);
+$accounts = [];
+try {
+    $stmt->execute($params);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($results) {
+        $accounts = $results;
+    } 
+    else{
+        flash("No matches found", "warning");
+    }
+} catch (PDOException $e) {
+    flash(var_export($e->errorInfo, true), "danger");
+}
+
+?>
+<h1> PICK YOUR ACCOUNT </h1>
+<form onsubmit="return validate(this)" method="POST">
+    <div>
+        <?php
+            $submittedValue='';
+        ?>
+            <select name="s_account">
+                <?php foreach ($accounts as $account) : ?>
+                    <option value="<?php se($account, 'account'); ?>"><?php se($account, "account"); ?></option>
+                <?php endforeach; ?>
+            </select>
+    <div>
+            <label>Memo</label>
+            <input type="text" name="message" required maxlength="150" />
+        </div>
+        <input type="submit" class="btn btn-info" value="CONFIRM" />
+    </div>
+</form>
+<script>
+    function validate(form) {
+        return true;
+    }
+</script>
+<?php
 if (!is_logged_in()) {
     flash("You must be logged in to access this page");
     die(header("Location: login.php"));
 }
 
-$account_id = get_user_id();
+$userAccount =se($_POST,"s_account","",false);
 
-//print($account_id);
-
-$db=getDB();
-$idNum = get_user_id();
-//get accountg
-$stmt = $db->prepare("SELECT account FROM BankAccounts WHERE user_ID=:userID ORDER BY created DESC LIMIT 1");
-$stmt->execute([":userID" => $idNum]);
-$userAccount = $stmt->fetch(PDO::FETCH_ASSOC);
-$userAccount = implode("",$userAccount);
-
-if(isset($account_id)) {
+if(isset($userAccount)){
 
     $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
     $r = $stmt->execute(["account_id" => $userAccount]);

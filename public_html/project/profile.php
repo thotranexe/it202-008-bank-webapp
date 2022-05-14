@@ -8,6 +8,8 @@ if (!is_logged_in()) {
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
+    $fname= se($_POST,"first","",false);
+    $last=se($_POST,"last","",false);
 
     $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
     $db = getDB();
@@ -31,7 +33,7 @@ if (isset($_POST["save"])) {
         }
     }
     //select fresh data from table
-    $stmt = $db->prepare("SELECT id, email, username from Users where id = :id LIMIT 1");
+    $stmt = $db->prepare("SELECT id, email, username, first_name, last_name from Users where id = :id LIMIT 1");
     try {
         $stmt->execute([":id" => get_user_id()]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -47,6 +49,10 @@ if (isset($_POST["save"])) {
         //echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
     }
 
+    if(!empty($fname)&&!empty($lname)){
+        $stmt=$db->prepare("INSERT INTO Users (first_name,last_name) Values (:fname,:lname)");
+        $stmt->execute([":fname"=>$fname,":lname"=>$last]);
+    }
 
     //check/update password
     $current_password = se($_POST, "currentPassword", null, false);
@@ -86,8 +92,21 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
+$First=se($user['first_name'],false);
+$Last=se($user['last_name'],false);
+$name=$first." ".$last;
 ?>
+<h1>Welcome </h1>
 <form method="POST" onsubmit="return validate(this);">
+<div class="mb-3">
+        <label>Welecome <?php se($name)?></label>
+        <?php if($first==""&&$last==""):?>
+            <label for="email">First Name,Last Name</label>
+            <input type="text" name="first" id="first" value="<?php se($First);?>" />
+            <input type="test" name="last" id="last" value="<?php se($Last);?>" />
+        <?php endif?>
+    </div>
+
     <div class="mb-3">
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="<?php se($email); ?>" />

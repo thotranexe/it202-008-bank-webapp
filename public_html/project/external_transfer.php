@@ -73,14 +73,14 @@ if(isset($_POST["amount"])&&!$haserror){
     print($last_name);
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
-    print($result);
+    print_r($result);
     if($result){
         $to_id=se($result,"id","",false);
-        $stmt=$db->prepare("SELECT account FROM BankAccounts WHERE id=:id");
+        $stmt=$db->prepare("SELECT account FROM BankAccounts WHERE id=:id limit 1");
         $stmt->execute([":id"=>$to_id]);
         $toaccount=$stmt->fetch(PDO::FETCH_ASSOC);
         $to=se($toaccount,"account","",false);
-        print($to."_hello_");
+        print_r($to."_hello_");
         if($to!=""){
             $transfer=(int)se($_POST,"amount","",false);
             $inverse=-1*$transfer;

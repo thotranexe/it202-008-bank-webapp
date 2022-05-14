@@ -39,10 +39,10 @@ try {
             </select>
     <div>
             <label>Filter by date</label>
-            <span>Start:</span>
+            <div>Start:</div>
             <input type="date" id="start" name="start"/>
-            <div><span>End:</span></div>
-            <input type="data" id="end" name="end"/>
+            <div>End:</div>
+            <input type="date" id="end" name="end"/>
         </div>
         <input type="submit" class="btn btn-info" value="CONFIRM" />
     </div>

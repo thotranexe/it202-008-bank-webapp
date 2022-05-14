@@ -65,16 +65,21 @@ if(isset($_POST["amount"])&&!$haserror){
     $idNum = get_user_id();
     //get accounts
     $from = se($_POST, "s_account", "", false);
-    $last_name = $_POST["last_name"];
-    $last_4 = $_POST["last_4"];
+    $last_name = se($_POST,"last_name","",false);
+    $last_4 = "%".se($_POST,"last_4","",false);
     $mem = se($_POST, "message", "", false);
-    $query=("SELECT a.id FROM Users u JOIN BankAccounts a on u.id = a.user_id WHERE (u.last_name = :last_name) AND (a.account LIKE :last_4)");
+    $query=("SELECT a.user_id FROM Users u JOIN BankAccounts a on u.id = a.user_id WHERE u.last_name = :last_name AND a.account LIKE :last_4");
     $stmt=$db->prepare($query);
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
-    se($result,"id","",true);
+    print(se($result,"id","",false));
     if($result){
-        $to=se($result,"id","",false);
+        $to_id=se($result,"id","",false);
+        $stmt->prepare("SELECT account FROM BankAccounts WHERE id=:id");
+        $stmt->execute([":id"=>$to_id]);
+        $toaccount=$stmt->fetch(PDO::FETCH_ASSOC);
+        $to=se($toaccount,"account","",false);
+        print($to);
     }
     else{
         flash("no accounts found","danger");

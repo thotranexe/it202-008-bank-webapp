@@ -36,7 +36,10 @@
   - [ ] \(05/13/2022 of completion) Create a User if doesnt exist/ World Account(initial scripts)
   - [ ] \(05/13/2022 of completion) Users can click for more information(transactions)
 - Milestone 3
-  - (duplicate template here for Milestone 1 features)
+  - [ ] \(05/13/2022 of completion) Filter Transaction history
+  - [ ] \(05/14/2022 of completion) External Transfer
+  - [ ] \(05/14/2022 of completion) Names
+  - [ ] \(05/13/2022 of completion) Internal Transfer
 - Milestone 4
   - (duplicate template here for Milestone 1 features)
   - 

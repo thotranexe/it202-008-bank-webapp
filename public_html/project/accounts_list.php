@@ -4,7 +4,7 @@ require(__DIR__ . "/../../partials/dashboard_nav.php");
 
 $db = getDB();
 $accNum = get_user_id();
-$query = "SELECT id, account, balance, accType, created, modified from BankAccounts WHERE user_id='".$accNum."'";
+$query = "SELECT id, account, balance, accType, created, modified, apy from BankAccounts WHERE user_id='".$accNum."'";
 
 //$stmt = $db->prepare($query); 
 //$stmt->bind_param("i", $accNum);
@@ -13,7 +13,7 @@ $query = "SELECT id, account, balance, accType, created, modified from BankAccou
 //$user = $result->fetch_assoc(); // fetch the data   
 
 $params = null;
-$query .= " ORDER BY modified desc LIMIT 5";
+$query .= " ORDER BY modified desc LIMIT 10";
 
 $stmt = $db->prepare($query);
 $accounts = [];
@@ -55,6 +55,9 @@ try {
                     <td style="padding-right: 15px;"><?php se($account, "balance"); ?></td>
                     <td style="padding-right: 15px;"><?php se($account, "created"); ?></td>  
                     <td style="padding-right: 15px;"><?php se($account, "modified"); ?></td>  
+                    <?php if(se($account,"apy","",false)!=NULL):?>
+                        <td style="padding-right: 15px;"><?php se($account, "apy")?></td>
+                    <?php endif;?>                        
                 </tr>
             <?php endforeach; ?>
         <?php endif; ?>

@@ -68,7 +68,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $last_name = $_POST["last_name"];
     $last_4 = $_POST["last_4"];
     $mem = se($_POST, "message", "", false);
-    $query=("SELECT a.id FROM Users u JOIN BankAccounts a on u.id = a.id WHERE u.last_name = :last_name AND a.account LIKE :last_4 LIMIT 1");
+    $query=("SELECT a.id FROM Users u JOIN BankAccounts a on u.user_id = a.id WHERE u.last_name = :last_name AND a.account LIKE :last_4 LIMIT 1");
     $stmt=$db->prepare($query);
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
     if($stmt){

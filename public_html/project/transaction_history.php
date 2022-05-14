@@ -59,8 +59,8 @@ if (!is_logged_in()) {
 }
 
 $userAccount=se($_POST,"s_account","",false);
-$start=strtotime(se($_POST,"start",NULL,false));
-$end=strtotime(se($_POST,"end",NULL,false));
+$start=strtotime(se($_POST,"start","",false));
+$end=strtotime(se($_POST,"end","",false));
 
 if(isset($userAccount)){
 

@@ -71,8 +71,9 @@ if(isset($userAccount)){
         $stmt->bindValue(":daystart",$start);
         $stmt->bindValue(":dayend",$end);
         $r = $stmt->execute();
+    }else{
+        $r = $stmt->execute([":account_id" => $userAccount]);
     }
-    $r = $stmt->execute([":account_id" => $userAccount]);
     if ($r) {
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         //print_r($transactions);

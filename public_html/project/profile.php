@@ -105,6 +105,7 @@ $first=se($full["first_name"],null,"",false);
 
 $stmt=$db->prepare("SELECT last_name FROM Users Where id=:id");
 $stmt->execute([":id"=>$id]);
+$full=$stmt->fetch(PDO::FETCH_ASSOC);
 $last=se($full["last_name"],null,"",false);
 $name=$first.", ".$last;
 ?>

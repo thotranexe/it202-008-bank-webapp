@@ -1,2 +1,2 @@
-ALTER TABLE BankAccounts 
-MODIFY COLUMN account varchar(12) not null unique DEFAULT (LPAD (RAND()*(9999999999999-0000000000001+1)+0000000000001, 12, '0'));
+ALTER TABLE Accounts
+    ADD COLUMN apy double;

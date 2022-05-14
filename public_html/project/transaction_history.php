@@ -66,8 +66,11 @@ if(isset($userAccount)){
 
     $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
     if(isset($start)&&isset($end)){
-        $stmt=$db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (account_src = :account_id) AND ( created BETWEEN :daystart AND :dayend) LIMIT 10");
-        $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start, ":dayend"=>$end]);
+        $stmt=$db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (account_src = :account_id) AND (created BETWEEN :daystart AND :dayend) LIMIT 10");
+        $stmt->bindValue(":account",$userAccount);
+        $stmt->bindValue(":daystart",$start);
+        $stmt->bindValue(":dayend",$end);
+        $r = $stmt->execute();
     }
     $r = $stmt->execute(["account_id" => $userAccount]);
     if ($r) {

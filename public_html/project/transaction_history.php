@@ -59,13 +59,18 @@ if (!is_logged_in()) {
 }
 
 $userAccount=se($_POST,"s_account","",false);
-$start=strtotime(se($_POST,"start","",false));
-$end=strtotime(se($_POST,"end","",false));
-
+$start=(se($_POST,"start","",false))." 00:00:00";
+$end=(se($_POST,"end","",false))."23:59:59";
+print($start);
+print($end);
 if(isset($userAccount)){
-
-    $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
+    if(empty($start)&&empty($end)){
+        $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
         $r = $stmt->execute([":account_id" => $userAccount]);
+    }else{
+        $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) LIMIT 10");
+        $r = $stmt->execute([":account_id" => $userAccountm,":daystart"=>$start,":dayend"=>$end]);
+    }
     if ($r) {
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         //print_r($transactions);
@@ -74,6 +79,7 @@ if(isset($userAccount)){
         flash("There was an error fetching transaction info " . var_export($e, true));
     }
 }
+
 ?>
     <h3>Transaction History</h3>
     <div class="results">

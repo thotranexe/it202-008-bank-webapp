@@ -65,15 +65,7 @@ $end=strtotime(se($_POST,"end",NULL,false));
 if(isset($userAccount)){
 
     $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
-    if(isset($start)&&isset($end)){
-        $stmt=$db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (account_src = :account_id) AND (created BETWEEN :daystart AND :dayend) LIMIT 10");
-        $stmt->bindValue(":account_id",$userAccount);
-        $stmt->bindValue(":daystart",$start);
-        $stmt->bindValue(":dayend",$end);
-        $r = $stmt->execute();
-    }else{
         $r = $stmt->execute([":account_id" => $userAccount]);
-    }
     if ($r) {
         $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         //print_r($transactions);

@@ -1,3 +1,2 @@
-ALTER TABLE BankAccounts 
-ADD first_name VARCHAR[30] NOT NULL DEFAULT Joe,
-ADD COLUMN last_name VARCHAR[30] NOT NULL DEFAULT Mama;
+ALTER TABLE Users
+    ADD COLUMN first_name varchar(30) default '';

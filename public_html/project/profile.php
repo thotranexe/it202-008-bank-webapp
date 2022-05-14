@@ -52,7 +52,7 @@ if (isset($_POST["save"])) {
     }
 
     if(!empty($fname)&&!empty($lname)){
-        $stmt=$db->prepare("INSERT INTO Users (first_name,last_name) Values (:fname,:lname) where id=:id");
+        $stmt=$db->prepare("UPDATE Users set first_name=:fname,last_name=:last_name where id=:id");
         $stmt->execute([":fname"=>$fname,":lname"=>$last]);
     }
 

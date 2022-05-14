@@ -66,9 +66,9 @@ if(isset($_POST["amount"])&&!$haserror){
     //get accounts
     $from = se($_POST, "s_account", "", false);
     $last_name = se($_POST,"last_name","",false);
-    $last_4 = "%".se($_POST,"last_4","",false);
+    $last_4 =se($_POST,"last_4","",false);
     $mem = se($_POST, "message", "", false);
-    $query=("SELECT a.user_id FROM Users u JOIN BankAccounts a on u.id = a.user_id WHERE u.last_name = :last_name AND a.account LIKE :last_4");
+    $query=("SELECT a.user_id FROM Users u JOIN BankAccounts a on u.id = a.user_id WHERE u.last_name = :last_name AND a.account LIKE %:last_4");
     $stmt=$db->prepare($query);
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -125,7 +125,7 @@ if(isset($_POST["amount"])&&!$haserror){
             else{
                 flash("balance too low","danger");
             }
-    }
+        }
         else
         {
             flash("Failed to transfer","danger");

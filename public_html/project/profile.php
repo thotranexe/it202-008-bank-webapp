@@ -52,6 +52,7 @@ if (isset($_POST["save"])) {
     }
 
     if(!empty($fname)&&!empty($lname)){
+        print("in update statement");
         $stmt=$db->prepare("UPDATE Users set first_name=:fname,last_name=:last_name where id=:id");
         $stmt->execute([":fname"=>$fname,":lname"=>$last]);
     }

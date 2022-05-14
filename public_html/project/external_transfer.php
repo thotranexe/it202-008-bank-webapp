@@ -75,7 +75,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
     print_r($result);
     if($result){
-        $to_id=se($result,"id","",false);
+        $to_id=se($result,"user_id","",false);
         $stmt=$db->prepare("SELECT account FROM BankAccounts WHERE id=:id limit 1");
         $stmt->execute([":id"=>$to_id]);
         $toaccount=$stmt->fetch(PDO::FETCH_ASSOC);

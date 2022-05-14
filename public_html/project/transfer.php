@@ -25,7 +25,7 @@ try {
     flash(var_export($e->errorInfo, true), "danger");
 }
 ?>
-<h1> transfer </h1>
+<h1> Transfer between your accounts </h1>
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <?php
@@ -67,49 +67,53 @@ if(isset($_POST["amount"])&&!$haserror){
     $to = se($_POST, "d_account", "", false);
     $mem = se($_POST, "message", "", false);
 
-    $transfer=(int)se($_POST,"amount","",false);
-    $inverse=-1*$transfer;
-    $tran_type='Transfer';
-    //transaction
+    if(strcmp($from,$to)<0){
+        $transfer=(int)se($_POST,"amount","",false);
+        $inverse=-1*$transfer;
+        $tran_type='Transfer';
+        //transaction
 
-    //from account balance
-    $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:s_account");
-    $stmt->execute([":s_account"=>$from]);
-    $frombal=$stmt->fetch(PDO::FETCH_ASSOC);
-    $frombal=implode("",$frombal);
-    //to account balance
-    $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:d_account");
-    $stmt->execute([":d_account"=>$to]);
-    $tobal=$stmt->fetch(PDO::FETCH_ASSOC);
-    $tobal=implode("",$tobal);
+        //from account balance
+        $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:s_account");
+        $stmt->execute([":s_account"=>$from]);
+        $frombal=$stmt->fetch(PDO::FETCH_ASSOC);
+        $frombal=implode("",$frombal);
+        //to account balance
+        $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:d_account");
+        $stmt->execute([":d_account"=>$to]);
+        $tobal=$stmt->fetch(PDO::FETCH_ASSOC);
+        $tobal=implode("",$tobal);
 
-    $test=$frombal-$tobal;
-    $s_nb=$frombal-$transfer;
-    $d_nb=$tobal+$transfer;
+        $test=$frombal-$tobal;
+        $s_nb=$frombal-$transfer;
+        $d_nb=$tobal+$transfer;
 
-    print($test);
-    if((int)$test>=0){
+        //print($test);
+        if((int)$test>=0){
         //first update from account
-        $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, memo, expected_total) 
-        VALUES(:s_acc,:d_account,:amount,:ttype,:memo,:expected_total),(:d_account,:s_acc,:inverse,:ttype,:memo,:expected_nb)");
-        $stmt->bindValue(":s_acc",$from);
-        $stmt->bindValue(":d_account",$to);
-        $stmt->bindValue(":amount",$inverse);
-        $stmt->bindValue(":ttype",$tran_type);
-        $stmt->bindValue(":memo",$mem);
-        $stmt->bindValue(":inverse",$transfer);
-        $stmt->bindValue(":expected_total",$s_nb);
-        $stmt->bindValue(":expected_nb",$d_nb);
-        $stmt->execute();
+            $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, memo, expected_total) 
+            VALUES(:s_acc,:d_account,:amount,:ttype,:memo,:expected_total),(:d_account,:s_acc,:inverse,:ttype,:memo,:expected_nb)");
+            $stmt->bindValue(":s_acc",$from);
+            $stmt->bindValue(":d_account",$to);
+            $stmt->bindValue(":amount",$inverse);
+            $stmt->bindValue(":ttype",$tran_type);
+            $stmt->bindValue(":memo",$mem);
+            $stmt->bindValue(":inverse",$transfer);
+            $stmt->bindValue(":expected_total",$s_nb);
+            $stmt->bindValue(":expected_nb",$d_nb);
+            $stmt->execute();
         //update balance
-        $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
-        $stmt->execute([":nb" => $s_nb,":account_transfering" => $from]);
-        $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
-        $stmt->execute([":nb" => $d_nb,":account_transfering" => $to]);
-        flash("Your transfer was sucessful","success");
+            $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
+            $stmt->execute([":nb" => $s_nb,":account_transfering" => $from]);
+            $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
+            $stmt->execute([":nb" => $d_nb,":account_transfering" => $to]);
+            flash("Your transfer was sucessful","success");
+        }else{
+            flash("balance too low","danger");
+        }
     }
     else{
-        flash("Your transfer was not successful","danger");
+        flash("Same Account","danger");
     }
     get_or_create_account();
 }

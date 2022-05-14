@@ -32,6 +32,11 @@ require(__DIR__ . "/../../partials/nav.php");
   <li class="nav-item">
     <a class="nav-link" href="<?php echo get_url('transfer.php'); ?>">Transfer</a>
   </li>
+  <?php if (is_logged_in()) : ?>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo get_url('external_transfer.php'); ?>">External Transfer</a>
+  </li>
+  <?php endif; ?>
   <?php endif; ?>
   <?php if (is_logged_in()) : ?>
   <li class="nav-item">

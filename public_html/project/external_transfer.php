@@ -126,14 +126,15 @@ if(isset($_POST["amount"])&&!$haserror){
                 flash("balance too low","danger");
             }
     }
-    else
-    {
-        flash("Failed to transfer","danger");
+        else
+        {
+            flash("Failed to transfer","danger");
+        }
+        get_or_create_account();
     }
-    get_or_create_account();
 }
-
 ?>
+
 <?php
 require(__DIR__ . "/../../partials/footer.php");
 ?>

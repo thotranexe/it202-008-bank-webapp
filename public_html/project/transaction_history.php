@@ -66,20 +66,22 @@ if (!is_logged_in()) {
 }
 
 $userAccount=se($_POST,"s_account","",false);
-$start=(se($_POST,"start","",false))." 00:00:00";
-$end=(se($_POST,"end","",false))." 23:59:59";
+$start=(se($_POST,"start","",false));
+$end=(se($_POST,"end","",false));
 $ttype=se($_POST,"t_type","ALL",false);
 //print($ttype);
 //print($start);
 //print($end);
 if(isset($userAccount)){
-    if(empty($start)&&empty($end)){
+    if(empty($start) && empty($end)){
         print("they are empty\n");
         $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE account_src = :account_id LIMIT 10");
         $r = $stmt->execute([":account_id" => $userAccount]);
     }
     else
     {
+        $start.=" 00:00:00";
+        $end.=" 23:59:59";
         if(strcmp($ttype,"ALL")>0){
             $stmt = $db->prepare("SELECT balance_change, transaction_type, created FROM Transactions WHERE (created BETWEEN :daystart AND :dayend) AND (account_src = :account_id) LIMIT 10");
             $r = $stmt->execute([":account_id" => $userAccount,":daystart"=>$start,":dayend"=>$end]);

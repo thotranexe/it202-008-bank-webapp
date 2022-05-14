@@ -108,11 +108,13 @@ if(isset($_POST["amount"])&&!$haserror){
             $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
             $stmt->execute([":nb" => $d_nb,":account_transfering" => $to]);
             flash("Your transfer was sucessful","success");
-        }else{
+        }
+        else{
             flash("balance too low","danger");
         }
     }
-    else{
+    else
+    {
         flash("Same Account","danger");
     }
     get_or_create_account();

@@ -80,55 +80,51 @@ if(isset($_POST["amount"])&&!$haserror){
         $toaccount=$stmt->fetch(PDO::FETCH_ASSOC);
         $to=se($toaccount,"account","",false);
         print($to);
-    }
-    else{
-        flash("no accounts found","danger");
-    }
-    if($to!=""){
-        $transfer=(int)se($_POST,"amount","",false);
-        $inverse=-1*$transfer;
-        $tran_type='EXT-Transfer';
-        //transaction
+        if($to!=""){
+            $transfer=(int)se($_POST,"amount","",false);
+            $inverse=-1*$transfer;
+            $tran_type='EXT-Transfer';
+            //transaction
 
-        //from account balance
-        $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:s_account");
-        $stmt->execute([":s_account"=>$from]);
-        $frombal=$stmt->fetch(PDO::FETCH_ASSOC);
-        $frombal=implode("",$frombal);
-        //to account balance
-        $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:d_account");
-        $stmt->execute([":d_account"=>$to]);
-        $tobal=$stmt->fetch(PDO::FETCH_ASSOC);
-        //$tobal=implode("",$tobal);
-        $tobal=(int)se($tobal,null,"",false);
+            //from account balance
+            $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:s_account");
+            $stmt->execute([":s_account"=>$from]);
+            $frombal=$stmt->fetch(PDO::FETCH_ASSOC);
+            $frombal=implode("",$frombal);
+            //to account balance
+            $stmt=$db->prepare("SELECT balance FROM BankAccounts WHERE account=:d_account");
+            $stmt->execute([":d_account"=>$to]);
+            $tobal=$stmt->fetch(PDO::FETCH_ASSOC);
+            //$tobal=implode("",$tobal);
+            $tobal=(int)se($tobal,null,"",false);
 
-        $s_nb=$frombal-$transfer;
-        $d_nb=$tobal+$transfer;
+            $s_nb=$frombal-$transfer;
+            $d_nb=$tobal+$transfer;
 
-        print($s_nb);
-        if((int)$s_nb>=0){
-        //first update from account
-            $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, memo, expected_total) 
-            VALUES(:s_acc,:d_account,:amount,:ttype,:memo,:expected_total),(:d_account,:s_acc,:inverse,:ttype,:memo,:expected_nb)");
-            $stmt->bindValue(":s_acc",$from);
-            $stmt->bindValue(":d_account",$to);
-            $stmt->bindValue(":amount",$inverse);
-            $stmt->bindValue(":ttype",$tran_type);
-            $stmt->bindValue(":memo",$mem);
-            $stmt->bindValue(":inverse",$transfer);
-            $stmt->bindValue(":expected_total",$s_nb);
-            $stmt->bindValue(":expected_nb",$d_nb);
-            $stmt->execute();
-        //update balance
-            $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
-            $stmt->execute([":nb" => $s_nb,":account_transfering" => $from]);
-            $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
-            $stmt->execute([":nb" => $d_nb,":account_transfering" => $to]);
-            flash("Your transfer was sucessful","success");
-        }
-        else{
-            flash("balance too low","danger");
-        }
+            print($s_nb);
+            if((int)$s_nb>=0){
+            //first update from account
+                $stmt = $db->prepare("INSERT INTO Transactions (account_src, account_dest, balance_change, transaction_type, memo, expected_total) 
+                VALUES(:s_acc,:d_account,:amount,:ttype,:memo,:expected_total),(:d_account,:s_acc,:inverse,:ttype,:memo,:expected_nb)");
+                $stmt->bindValue(":s_acc",$from);
+                $stmt->bindValue(":d_account",$to);
+                $stmt->bindValue(":amount",$inverse);
+                $stmt->bindValue(":ttype",$tran_type);
+                $stmt->bindValue(":memo",$mem);
+                $stmt->bindValue(":inverse",$transfer);
+                $stmt->bindValue(":expected_total",$s_nb);
+                $stmt->bindValue(":expected_nb",$d_nb);
+                $stmt->execute();
+            //update balance
+                $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
+                $stmt->execute([":nb" => $s_nb,":account_transfering" => $from]);
+                $stmt=$db->prepare("UPDATE BankAccounts SET balance=:nb WHERE account=:account_transfering");
+                $stmt->execute([":nb" => $d_nb,":account_transfering" => $to]);
+                flash("Your transfer was sucessful","success");
+            }
+            else{
+                flash("balance too low","danger");
+            }
     }
     else
     {

@@ -73,7 +73,7 @@ if(isset($_POST["amount"])&&!$haserror){
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
     if($stmt){
         $result=$stmt->fetch(PDO::FETCH_ASSOC);
-        $to=se($result['id'],null,"",false);
+        $to=$result['id'];
     }
     if($from!=$to){
         $transfer=(int)se($_POST,"amount","",false);

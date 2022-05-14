@@ -73,7 +73,7 @@ if(isset($_POST["amount"])&&!$haserror){
     print($last_name);
     $stmt->execute([":last_name"=>$last_name,":last_4"=>$last_4]);
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
-    print(se($result,"id","",false));
+    print($result);
     if($result){
         $to_id=se($result,"id","",false);
         $stmt=$db->prepare("SELECT account FROM BankAccounts WHERE id=:id");

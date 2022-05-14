@@ -84,7 +84,7 @@ if(isset($_POST["amount"])&&!$haserror){
     else{
         flash("no accounts found","danger");
     }
-    if($to!=NULL){
+    if($to!=""){
         $transfer=(int)se($_POST,"amount","",false);
         $inverse=-1*$transfer;
         $tran_type='EXT-Transfer';

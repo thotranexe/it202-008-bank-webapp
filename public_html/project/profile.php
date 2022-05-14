@@ -50,7 +50,7 @@ if (isset($_POST["save"])) {
     }
 
     if(!empty($fname)&&!empty($lname)){
-        $stmt=$db->prepare("INSERT INTO Users (first_name,last_name) Values (:fname,:lname)");
+        $stmt=$db->prepare("INSERT INTO Users (first_name,last_name) Values (:fname,:lname) where id=:id");
         $stmt->execute([":fname"=>$fname,":lname"=>$last]);
     }
 
@@ -92,18 +92,20 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
-$First=se($user['first_name'],false);
-$Last=se($user['last_name'],false);
-$name=$first." ".$last;
+$stmt=$db->prepare("SELECT first_name, last_name FROM Users Where id=:id");
+$stmt->execute([":id"=>$id]);
+$full=$stmt->fetch(PDO::FETCH_ASSOC);
+$first=se($full["first_name"],null,"",false);
+$last=se($full["last_name"],null,"",false);
+$name=$first.", ".$last;
 ?>
-<h1>Welcome </h1>
+<h1>Welcome <?php se($name)?> </h1>
 <form method="POST" onsubmit="return validate(this);">
 <div class="mb-3">
-        <label>Welecome <?php se($name)?></label>
         <?php if($first==""&&$last==""):?>
             <label for="email">First Name,Last Name</label>
-            <input type="text" name="first" id="first" value="<?php se($First);?>" />
-            <input type="test" name="last" id="last" value="<?php se($Last);?>" />
+            <input type="text" name="first" id="first" value="<?php se($first);?>" />
+            <input type="test" name="last" id="last" value="<?php se($last);?>" />
         <?php endif?>
     </div>
 

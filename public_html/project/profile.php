@@ -9,7 +9,7 @@ if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
     $fname= se($_POST,"first","",false);
-    $last=se($_POST,"last","",false);
+    $lname=se($_POST,"last","",false);
 
     $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
     $db = getDB();
@@ -54,7 +54,7 @@ if (isset($_POST["save"])) {
     if(!empty($fname)&&!empty($lname)){
         print("in update statement");
         $stmt=$db->prepare("UPDATE Users set first_name=:fname,last_name=:last_name where id=:id");
-        $stmt->execute([":fname"=>$fname,":lname"=>$last]);
+        $stmt->execute([":fname"=>$fname,":lname"=>$lname]);
     }
 
     //check/update password
